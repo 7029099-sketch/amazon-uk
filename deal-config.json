@@ -70,6 +70,52 @@
     "requireReviews": true,
     "requireShippingCheck": true
   },
+  "compliance": {
+    "enforceForPublicCatalog": false,
+    "maxPriceAgeHours": 24,
+    "requireSourceUrl": true,
+    "requireSourceAttribution": true,
+    "requireContentUseBasis": true,
+    "requirePriceTimestamp": true,
+    "requireShippingReview": true,
+    "requireTrademarkReviewForAds": true,
+    "requireIndependentBrandBeforeAds": true,
+    "requireClearAdvertiserIdentity": true,
+    "requireAffiliateDisclosureWhenApplicable": true,
+    "forbidOfficialPartnerClaimsWithoutProof": true,
+    "forbidMarketplaceCustomerCredentials": true,
+    "forbidMarketplaceFraming": true,
+    "forbidMarketplaceMarkInFinalDomain": true,
+    "separateAffiliateAndManagedPurchaseFlows": true,
+    "amazonAssociates": {
+      "programContentOnlyLinksToAmazon": true,
+      "specialLinksOnlyToAmazon": true,
+      "managedPurchaseOnBehalfMustNotUseAssociatesFlow": true,
+      "noCustomerAmazonCredentials": true,
+      "noAmazonSiteFraming": true,
+      "thirdPartySellerMarksRequireRights": true,
+      "offlineProgramContentRestricted": true
+    },
+    "ads": {
+      "landingPageMustStateAdvertiserRole": true,
+      "landingPageMustShowCommercialInfo": true,
+      "noMisleadingAffiliation": true,
+      "businessNameMustMatchVerifiedIdentity": true,
+      "adPriceMustMatchLandingPageOrBeClearlyQualified": true
+    },
+    "launchGates": {
+      "independentBrandSelected": false,
+      "finalDomainSelected": false,
+      "marketplaceDataRightsReviewed": false,
+      "amazonAssociatesFlowReviewed": false,
+      "managedPurchaseFlowReviewed": false,
+      "advertisingPoliciesReviewed": false,
+      "privacyAndTermsReviewed": false,
+      "taxAndFiscalFlowReviewed": false,
+      "carrierRestrictionsReviewed": false
+    },
+    "notes": "Guardrails are operational checks, not legal advice. Before public launch and paid ads, re-check current marketplace, advertising, consumer, tax and carrier rules and record the review date."
+  },
   "hideExpiredDeals": true,
   "notes": "Current feed is a manually verified snapshot. Replace it with approved server-side marketplace data before claiming live or automatic prices. Daily automation should compare previous snapshots, preserve history and mark stale/expired products inactive instead of deleting order history."
 }
