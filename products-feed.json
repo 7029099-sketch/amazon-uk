@@ -34,6 +34,18 @@
       "hazmat": false,
       "dealExpired": false,
       "returnRisk": "low",
+      "compliance": {
+        "contentUseBasis": "manual-review-required",
+        "contentRightsStatus": "review-required",
+        "trademarkReviewed": false,
+        "sourceTermsReviewed": false,
+        "affiliateEnabled": false,
+        "managedPurchaseEligible": true,
+        "managedPurchaseOnBehalf": true,
+        "affiliateDisclosurePresent": false,
+        "adsEligible": false,
+        "notes": "Prototype snapshot only. Confirm rights/source terms before paid promotion or production publication."
+      },
       "desc": "Набор из двух силиконовых прихваток KitchenAid. Лёгкий, компактный, без электроники и размеров - удобный товар для международной доставки.",
       "features": ["2 прихватки в наборе", "Термостойкий силикон", "Вес около 268 г", "Без электроники и совместимости", "Рейтинг Amazon 4.7"]
     },
@@ -69,6 +81,18 @@
       "hazmat": false,
       "dealExpired": false,
       "returnRisk": "low",
+      "compliance": {
+        "contentUseBasis": "manual-review-required",
+        "contentRightsStatus": "review-required",
+        "trademarkReviewed": false,
+        "sourceTermsReviewed": false,
+        "affiliateEnabled": false,
+        "managedPurchaseEligible": true,
+        "managedPurchaseOnBehalf": true,
+        "affiliateDisclosurePresent": false,
+        "adsEligible": false,
+        "notes": "Prototype snapshot only. Confirm rights/source terms before paid promotion or production publication."
+      },
       "desc": "Дорожный органайзер BAGSMART с широким раскрытием и несколькими отделениями. Без размера, электроники и сложной совместимости.",
       "features": ["Несколько отделений", "Широкое раскрытие", "Вес около 439 г", "Без размера и электроники", "Рейтинг Amazon 4.7"]
     }
