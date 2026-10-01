@@ -70,7 +70,7 @@ async function loadStore(){
     if(!feedRes.ok) throw new Error('Product feed unavailable');
     const feed=await feedRes.json();
     const normalized=(feed.products||[]).map(normalizeProduct);
-    STORE_PRODUCTS=feed.live?normalized.filter(passesSelection):normalized;
+    STORE_PRODUCTS=normalized.filter(passesSelection);
     STORE_META={source:feed.source||'feed',live:Boolean(feed.live),generatedAt:feed.generatedAt||null};
     window.dispatchEvent(new CustomEvent('productsloaded',{detail:STORE_META}));
     return STORE_PRODUCTS;
