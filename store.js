@@ -1,25 +1,52 @@
-const STORE_PRODUCTS=[
-{id:1,cat:'electronics',brand:'Sony',name:'WH‑1000XM5 Wireless Headphones',image:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85',price:12490,old:21490,discount:42,rating:4.7,reviews:12400,weight:.9,sku:'SONY-XM5',desc:'Флагманские беспроводные наушники с активным шумоподавлением и длительной автономностью.',features:['Активное шумоподавление','До 30 часов работы','Bluetooth multipoint','Быстрая зарядка']},
-{id:2,cat:'kids',brand:'LEGO',name:'Creator 3‑in‑1 Deep Sea Creatures',image:'https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=900&q=85',price:1790,old:2990,discount:40,rating:4.8,reviews:8200,weight:.6,sku:'LEGO-31088',desc:'Набор LEGO Creator 3-в-1 для детей: несколько вариантов сборки в одной коробке.',features:['3 модели в 1 наборе','Развивает моторику','Оригинальный LEGO','Подарочная упаковка']},
-{id:3,cat:'home',brand:'Philips',name:'Airfryer Compact Essential',image:'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=85',price:3490,old:5290,discount:34,rating:4.6,reviews:9700,weight:2.1,sku:'PHIL-AF',desc:'Компактный аэрогриль для приготовления с меньшим количеством масла.',features:['Компактный корпус','Простое управление','Съёмная корзина','Лёгкая очистка']},
-{id:4,cat:'beauty',brand:'CeraVe',name:'Hydrating Skin Care Set',image:'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=85',price:1290,old:1990,discount:35,rating:4.8,reviews:18300,weight:.7,sku:'CERAVE-SET',desc:'Набор базового ухода для ежедневного очищения и увлажнения кожи.',features:['Для ежедневного ухода','С церамидами','Без резкого аромата','Популярный бренд США']},
-{id:5,cat:'auto',brand:'Anker',name:'Compact Car Charger 67W',image:'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=900&q=85',price:990,old:1590,discount:38,rating:4.7,reviews:6700,weight:.2,sku:'ANKER-67W',desc:'Компактное автомобильное зарядное устройство высокой мощности.',features:['До 67W','USB-C','Компактный размер','Защита от перегрева']},
-{id:6,cat:'electronics',brand:'JBL',name:'Flip 6 Portable Bluetooth Speaker',image:'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=900&q=85',price:2790,old:4490,discount:38,rating:4.7,reviews:14200,weight:.8,sku:'JBL-FLIP6',desc:'Портативная Bluetooth-колонка JBL с мощным звуком и защитой для поездок.',features:['Защита от воды','До 12 часов работы','Bluetooth','Компактный корпус']},
-{id:7,cat:'kids',brand:'Fisher‑Price',name:'Baby Learning Toy Set',image:'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=900&q=85',price:1490,old:2390,discount:38,rating:4.8,reviews:5100,weight:.9,sku:'FP-LEARN',desc:'Развивающий набор для малышей с яркими безопасными элементами.',features:['Для раннего развития','Безопасные материалы','Яркие элементы','Подарочный вариант']},
-{id:8,cat:'home',brand:'Shark',name:'Handheld Cordless Vacuum',image:'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=900&q=85',price:4290,old:6490,discount:34,rating:4.5,reviews:7800,weight:1.8,sku:'SHARK-HV',desc:'Компактный беспроводной пылесос для быстрой уборки дома и автомобиля.',features:['Беспроводной','Компактный','Насадки в комплекте','Для дома и авто']},
-{id:9,cat:'electronics',brand:'Apple',name:'AirPods Pro 2',image:'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=900&q=85',price:7990,old:10990,discount:27,rating:4.9,reviews:20100,weight:.2,sku:'AIRPODS-P2',desc:'Компактные беспроводные наушники с активным шумоподавлением.',features:['ANC','USB-C','Spatial Audio','Компактный кейс']},
-{id:10,cat:'home',brand:'Ninja',name:'Professional Blender',image:'https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=900&q=85',price:3890,old:6790,discount:43,rating:4.7,reviews:9200,weight:2.4,sku:'NINJA-BL',desc:'Мощный стационарный блендер для смузи и домашних рецептов.',features:['Высокая мощность','Большая чаша','Несколько режимов','Лёгкая мойка']},
-{id:11,cat:'beauty',brand:'The Ordinary',name:'Daily Skin Essentials',image:'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=85',price:1190,old:2190,discount:46,rating:4.8,reviews:15600,weight:.5,sku:'ORD-SET',desc:'Базовый набор ежедневного ухода за кожей.',features:['Популярные формулы','Минималистичный состав','Для ежедневного ухода','Набор из нескольких средств']},
-{id:12,cat:'toys',brand:'Melissa & Doug',name:'Wooden Activity Set',image:'https://images.unsplash.com/photo-1599443015574-be5fe8a05783?auto=format&fit=crop&w=900&q=85',price:1390,old:2790,discount:50,rating:4.8,reviews:4300,weight:1.1,sku:'MD-WOOD',desc:'Деревянный развивающий набор для игры и обучения.',features:['Деревянные элементы','Развитие моторики','Подарочный формат','Для детей']}
-];
-function getProduct(id){return STORE_PRODUCTS.find(p=>p.id===Number(id))||STORE_PRODUCTS[0]}
+let STORE_PRODUCTS=[];
+let STORE_CONFIG=null;
+let STORE_META={source:'unknown',live:false,generatedAt:null};
+
+function calcDeliveredUah(priceUsd,weightKg=0.5,config=STORE_CONFIG){
+  const c=config||{defaultUsdUahRate:42,shipping:{baseUsd:6.9,extraPerKgUsd:4.1},serviceFee:{type:'fixed',valueUsd:7}};
+  const weight=Math.max(.1,Number(weightKg)||.5);
+  const shipping=c.shipping.baseUsd+Math.max(0,weight-.5)*c.shipping.extraPerKgUsd;
+  const fee=c.serviceFee.type==='percent'?Number(priceUsd)*c.serviceFee.valueUsd:Number(c.serviceFee.valueUsd||0);
+  return Math.round((Number(priceUsd)+shipping+fee)*Number(c.defaultUsdUahRate||42));
+}
+
+function normalizeProduct(p){
+  const price=Number(p.price ?? (p.priceUsd!=null?calcDeliveredUah(p.priceUsd,p.weight):0));
+  const old=Number(p.old ?? (p.listPriceUsd!=null?calcDeliveredUah(p.listPriceUsd,p.weight):price));
+  const discount=Number(p.discount ?? (old>0?Math.round((1-price/old)*100):0));
+  return {...p,id:Number(p.id),price,old,discount,reviews:Number(p.reviews||0),rating:Number(p.rating||0),weight:Number(p.weight||0)};
+}
+
+async function loadStore(){
+  try{
+    const [feedRes,configRes]=await Promise.all([
+      fetch('products-feed.json',{cache:'no-store'}),
+      fetch('deal-config.json',{cache:'no-store'})
+    ]);
+    if(configRes.ok) STORE_CONFIG=await configRes.json();
+    if(!feedRes.ok) throw new Error('Product feed unavailable');
+    const feed=await feedRes.json();
+    STORE_PRODUCTS=(feed.products||[]).map(normalizeProduct);
+    STORE_META={source:feed.source||'feed',live:Boolean(feed.live),generatedAt:feed.generatedAt||null};
+    window.dispatchEvent(new CustomEvent('productsloaded',{detail:STORE_META}));
+    return STORE_PRODUCTS;
+  }catch(err){
+    console.error('Store feed error:',err);
+    STORE_PRODUCTS=[];
+    window.dispatchEvent(new CustomEvent('productsloaded',{detail:{source:'error',live:false,error:true}}));
+    return STORE_PRODUCTS;
+  }
+}
+
+window.storeReady=loadStore();
+function getProduct(id){return STORE_PRODUCTS.find(p=>p.id===Number(id))||null}
 function getCart(){try{return JSON.parse(localStorage.getItem('amazonUkCart'))||[]}catch(e){return[]}}
 function saveCart(cart){localStorage.setItem('amazonUkCart',JSON.stringify(cart));window.dispatchEvent(new Event('cartchange'))}
 function addToCart(id,qty=1){const cart=getCart(),item=cart.find(x=>x.id===Number(id));if(item)item.qty+=qty;else cart.push({id:Number(id),qty});saveCart(cart);return cart}
 function setQty(id,qty){let cart=getCart();const item=cart.find(x=>x.id===Number(id));if(!item)return;item.qty=Math.max(0,Number(qty)||0);cart=cart.filter(x=>x.qty>0);saveCart(cart)}
 function removeFromCart(id){saveCart(getCart().filter(x=>x.id!==Number(id)))}
 function cartCount(){return getCart().reduce((s,x)=>s+x.qty,0)}
-function cartTotal(){return getCart().reduce((s,x)=>s+getProduct(x.id).price*x.qty,0)}
-function formatUah(v){return Math.round(v).toLocaleString('ru-RU')+' ₴'}
+function cartTotal(){return getCart().reduce((s,x)=>{const p=getProduct(x.id);return s+(p?p.price*x.qty:0)},0)}
+function formatUah(v){return Math.round(Number(v)||0).toLocaleString('ru-RU')+' ₴'}
 function syncCartBadges(){document.querySelectorAll('[data-cart-count]').forEach(el=>el.textContent=cartCount())}
 window.addEventListener('cartchange',syncCartBadges);document.addEventListener('DOMContentLoaded',syncCartBadges);
