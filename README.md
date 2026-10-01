@@ -1,6 +1,12 @@
-# US deals search for Ukraine
+# Хапай — Шо, так можно?!
 
-Working prototype of a **«Поисковик выгодных товаров США для украинцев»**.
+Independent storefront brand: **Хапай**.
+
+Tagline: **Шо, так можно?!**
+
+Positioning: **Бренды с Amazon. Без ноунейма.**
+
+Working prototype of a branded-deal discovery and ordering service for Ukraine.
 
 The product is designed as a marketplace-agnostic discovery and ordering layer. Amazon US is the first source; Walmart, eBay, Target, Best Buy and other approved US sources can later plug into the same normalized search API without rebuilding the storefront, cart or operations flow.
 
@@ -51,4 +57,5 @@ The backend foundation provides the next production layer: shared PostgreSQL dat
 - carrier / 3PL integrations
 - Telegram bot integration
 - accounting and legal review of the commission/payment/fiscal flow
-- select the final independent brand/domain and replace the working Amazon-oriented prototype branding before public launch
+- select the final domain for the Хапай brand before public launch
+

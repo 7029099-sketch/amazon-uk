@@ -36,7 +36,7 @@ function navigate(section){
   document.querySelectorAll('.admin-nav [data-section]').forEach(x=>x.classList.toggle('active',x.dataset.section===section));
   const btn=document.querySelector(`.admin-nav [data-section="${section}"]`);
   setText('sectionTitle',btn?.querySelector('span')?.textContent||'Обзор');
-  setText('sectionEyebrow',section==='dashboard'?'Операционный центр':'Amazon UK Ops');
+  setText('sectionEyebrow',section==='dashboard'?'Операционный центр':'Хапай Ops');
   document.getElementById('adminSide')?.classList.remove('open');
   location.hash=section==='dashboard'?'':'#'+section;
 }

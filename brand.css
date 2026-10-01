@@ -1,0 +1,7 @@
+.market-logo .brand-wordmark,.shop-brand .brand-wordmark{display:flex;flex-direction:column;align-items:flex-start;gap:4px;line-height:1;white-space:nowrap}
+.brand-name{font:800 24px/1 Manrope,Inter,system-ui,sans-serif;letter-spacing:-.6px}
+.brand-tagline{font:600 10px/1.2 Inter,system-ui,sans-serif;letter-spacing:.01em}
+.market-logo .brand-tagline{color:#cbd5e1}
+.shop-brand .brand-tagline{color:#64748b}
+@media(max-width:760px){.market-logo{flex-shrink:0}.market-search{min-width:0}.market-search button{flex-shrink:0;width:42px}}
+@media(max-width:640px){.brand-name{font-size:21px}.brand-tagline{font-size:9px}.market-logo,.shop-brand{gap:8px}}
