@@ -1,0 +1,23 @@
+{
+  "source": "amazon-us",
+  "mode": "feed",
+  "minDiscount": 35,
+  "minRating": 4.5,
+  "minReviews": 1000,
+  "maxPriceUsd": 100,
+  "maxWeightKg": 2,
+  "currency": "USD",
+  "targetCurrency": "UAH",
+  "defaultUsdUahRate": 42,
+  "shipping": {
+    "baseUsd": 6.9,
+    "extraPerKgUsd": 4.1
+  },
+  "serviceFee": {
+    "type": "fixed",
+    "valueUsd": 7
+  },
+  "refreshMinutes": 60,
+  "hideExpiredDeals": true,
+  "notes": "Prototype configuration. Replace feed source with an approved live product data provider when credentials are available."
+}
