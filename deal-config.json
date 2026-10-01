@@ -1,17 +1,23 @@
 {
   "source": "amazon-us",
-  "mode": "feed",
+  "mode": "verified-snapshot",
   "minDiscount": 35,
   "minRating": 4.5,
   "minReviews": 1000,
   "maxPriceUsd": 100,
   "maxWeightKg": 2,
+  "preferredMaxWeightKg": 1,
+  "preferredPriceUsd": {
+    "min": 15,
+    "max": 80
+  },
   "currency": "USD",
   "targetCurrency": "UAH",
   "defaultUsdUahRate": 42,
   "shipping": {
     "baseUsd": 6.9,
-    "extraPerKgUsd": 4.1
+    "extraPerKgUsd": 4.1,
+    "billableWeightRule": "max_actual_or_volumetric"
   },
   "serviceFee": {
     "type": "percent_with_minimum",
@@ -25,13 +31,27 @@
     "message": "Стоимость товаров в одном международном отправлении для одного получателя рекомендуется держать до 150 евро. При превышении лимита могут возникнуть таможенные платежи."
   },
   "selection": {
+    "preferredCategories": ["home", "kitchen", "travel", "toys", "office", "pets"],
     "preferCompactItems": true,
     "preferLowVolumetricWeight": true,
+    "preferNoSizing": true,
+    "preferNoCompatibility": true,
+    "preferNoBattery": true,
+    "preferNonFragile": true,
     "avoidRestrictedShippingCategories": true,
     "preferStrongRealDiscounts": true,
-    "targetMarginMinUsd": 8
+    "targetMarginMinUsd": 8,
+    "deprioritize": ["clothing", "shoes", "liquids", "cosmetics", "perfume", "large-appliances", "phones", "expensive-electronics", "glass", "battery-goods", "model-specific-auto", "supplements"]
   },
-  "refreshMinutes": 60,
+  "verification": {
+    "targetCadenceHours": 24,
+    "hideIfVerificationFails": false,
+    "neverLabelManualSnapshotAsLive": true,
+    "requirePrice": true,
+    "requireRating": true,
+    "requireReviews": true,
+    "requireShippingCheck": true
+  },
   "hideExpiredDeals": true,
-  "notes": "Prototype configuration. Product selection should favor strong discounts, high ratings, many reviews, compact/lightweight goods, safe shipping categories, and goods value below the customs threshold. Replace feed source with an approved live product data provider when credentials are available."
+  "notes": "Current feed is a manually verified snapshot. Replace it with an approved server-side Amazon data source before claiming live or automatic prices. Daily automation should compare previous snapshots, preserve history and mark stale/expired products inactive instead of deleting order history."
 }
