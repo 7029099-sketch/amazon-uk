@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-10-01T17:45:00Z",
-  "source": "amazon-us-manually-verified",
-  "live": true,
+  "source": "amazon-us-manual-snapshot",
+  "live": false,
   "products": [
     {
       "id": 1001,
@@ -26,7 +26,7 @@
       "weight": 0.268,
       "sku": "AMZ-B09BK5R5Z5",
       "sourceUrl": "https://www.amazon.com/dp/B09BK5R5Z5",
-      "sourceStatus": "live-manual",
+      "sourceStatus": "verified-snapshot",
       "lastCheckedAt": "2026-10-01T17:45:00Z",
       "dealVerified": true,
       "shippingAllowed": true,
@@ -34,7 +34,7 @@
       "hazmat": false,
       "dealExpired": false,
       "returnRisk": "low",
-      "desc": "Набор из двух силиконовых прихваток KitchenAid. Лёгкий, компактный, без электроники и размеров — удобный товар для международной доставки.",
+      "desc": "Набор из двух силиконовых прихваток KitchenAid. Лёгкий, компактный, без электроники и размеров - удобный товар для международной доставки.",
       "features": ["2 прихватки в наборе", "Термостойкий силикон", "Вес около 268 г", "Без электроники и совместимости", "Рейтинг Amazon 4.7"]
     },
     {
@@ -61,7 +61,7 @@
       "weight": 0.439,
       "sku": "AMZ-B0CKYZWDPT",
       "sourceUrl": "https://www.amazon.com/dp/B0CKYZWDPT",
-      "sourceStatus": "live-manual",
+      "sourceStatus": "verified-snapshot",
       "lastCheckedAt": "2026-10-01T17:45:00Z",
       "dealVerified": true,
       "shippingAllowed": true,
