@@ -1,6 +1,7 @@
 let STORE_PRODUCTS=[];
 let STORE_CONFIG=null;
 let STORE_META={source:'unknown',live:false,generatedAt:null};
+const COMMISSION_TERMS_VERSION='2026-10-01-v1';
 
 function usdRate(){return Number(STORE_CONFIG?.defaultUsdUahRate||42)}
 function eurUsdRate(){return Number(STORE_CONFIG?.customs?.defaultEurUsdRate||1.17)}
@@ -33,6 +34,27 @@ function priceBreakdown(p){
   const shipping=shippingUsd(billableWeightKg(p));
   const service=serviceFeeUsd(productUsd);
   return {productUsd,shippingUsd:shipping,serviceUsd:service,totalUsd:productUsd+shipping+service,totalUah:Number(p?.price)||Math.round((productUsd+shipping+service)*usdRate()),productEur:productUsd/eurUsdRate(),billableWeightKg:billableWeightKg(p)};
+}
+function cartFinancialBreakdown(cart=getCart()){
+  const result=cart.reduce((acc,x)=>{const p=getProduct(x.id);if(!p)return acc;const b=priceBreakdown(p),q=Number(x.qty)||1;acc.productUsd+=b.productUsd*q;acc.shippingUsd+=b.shippingUsd*q;acc.serviceUsd+=b.serviceUsd*q;acc.totalUah+=(Number(p.price)||Math.round(b.totalUsd*usdRate()))*q;return acc},{productUsd:0,shippingUsd:0,serviceUsd:0,totalUah:0});
+  result.productUah=Math.round(result.productUsd*usdRate());
+  result.shippingUah=Math.round(result.shippingUsd*usdRate());
+  result.serviceUah=Math.round(result.serviceUsd*usdRate());
+  result.totalUsd=result.productUsd+result.shippingUsd+result.serviceUsd;
+  result.executionFundsUah=result.productUah+result.shippingUah;
+  return result;
+}
+function commissionOrderSnapshot(cart=getCart()){
+  const financials=cartFinancialBreakdown(cart);
+  return {
+    agreementType:'commission',
+    termsVersion:COMMISSION_TERMS_VERSION,
+    offerUrl:'offer.html',
+    agentActs:'in_own_name_at_principal_expense',
+    financials,
+    priceIncreaseRequiresApproval:true,
+    reportStatus:'pending_execution'
+  };
 }
 function customsLimitEur(){return Number(STORE_CONFIG?.customs?.limitEur||150)}
 function customsRecommendedEur(){return Number(STORE_CONFIG?.customs?.recommendedMaxEur||145)}
