@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Amazon UK Ops - админка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-side" id="adminSide">
+    <a class="admin-brand" href="index.html"><span>a</span><b>amazon uk</b><small>OPS</small></a>
+    <nav class="admin-nav">
+      <button class="active" data-section="dashboard">⌂ <span>Обзор</span></button>
+      <button data-section="orders">▣ <span>Заказы</span><i id="navOrderCount">0</i></button>
+      <button data-section="purchases">$ <span>Выкуп в США</span></button>
+      <button data-section="warehouse">▤ <span>Склад США</span></button>
+      <button data-section="logistics">↗ <span>Логистика</span></button>
+      <button data-section="products">◇ <span>Товары</span></button>
+      <button data-section="finance">₴ <span>Финансы</span></button>
+      <button data-section="documents">▧ <span>Документы</span></button>
+      <button data-section="customers">◉ <span>Клиенты</span></button>
+      <button data-section="team">♙ <span>Команда и доступ</span></button>
+      <button data-section="integrations">⌁ <span>Интеграции</span></button>
+      <button data-section="settings">⚙ <span>Настройки</span></button>
+    </nav>
+    <div class="admin-side__foot"><span class="dot warning"></span><div><b>Prototype mode</b><small>Auth и база ещё не подключены</small></div></div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div><p class="eyebrow" id="sectionEyebrow">Операционный центр</p><h1 id="sectionTitle">Обзор</h1></div>
+      <div class="admin-topbar__right">
+        <div class="sync-state"><span class="dot" id="feedDot"></span><div><small>Каталог</small><b id="feedState">загрузка...</b></div></div>
+        <label class="role-select"><small>Роль просмотра</small><select id="roleSelect"><option value="owner">Владелец</option><option value="operator">Оператор</option><option value="buyer">Закупщик</option><option value="logistics">Логист</option><option value="finance">Финансы</option><option value="content">Контент</option></select></label>
+        <div class="avatar">A</div>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <section class="admin-section active" data-section-panel="dashboard">
+        <div class="demo-banner"><b>Админка уже собрана как рабочая модель.</b><span>Сейчас данные заказов хранятся локально в браузере. Для реальных админов, паролей, ролей, инвойсов и синхронизации между устройствами нужен backend + база + авторизация. Интерфейс и структура под это уже подготовлены.</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><small>Заказы</small><strong id="statOrders">0</strong><span>всего в системе</span></article>
+          <article class="stat-card"><small>Оборот заказов</small><strong id="statRevenue">0 ₴</strong><span>товар + доставка + комиссия</span></article>
+          <article class="stat-card"><small>Комиссия сервиса</small><strong id="statCommission">0 ₴</strong><span>отдельно от средств на исполнение</span></article>
+          <article class="stat-card"><small>На складе США</small><strong id="statWarehouse">0</strong><span>готово к консолидации</span></article>
+          <article class="stat-card"><small>Товаров в каталоге</small><strong id="statProducts">0</strong><span>после автоматического фильтра</span></article>
+          <article class="stat-card alert"><small>Требуют внимания</small><strong id="statAlerts">0</strong><span>заказы и данные</span></article>
+        </div>
+
+        <div class="admin-grid admin-grid--2">
+          <article class="admin-card"><div class="card-head"><div><small>Воронка заказа</small><h2>Где сейчас заказы</h2></div></div><div class="pipeline" id="pipeline"></div></article>
+          <article class="admin-card"><div class="card-head"><div><small>Сегодня</small><h2>Очередь действий</h2></div></div><div class="task-list" id="taskList"></div></article>
+        </div>
+
+        <article class="admin-card"><div class="card-head"><div><small>Последние</small><h2>Заказы</h2></div><button class="ghost" data-go="orders">Открыть все</button></div><div class="table-wrap"><table><thead><tr><th>Заказ</th><th>Клиент</th><th>Сумма</th><th>Товаров</th><th>Статус</th><th>Дата</th></tr></thead><tbody id="recentOrdersBody"></tbody></table></div></article>
+      </section>
+
+      <section class="admin-section" data-section-panel="orders">
+        <div class="section-tools"><div class="searchbox"><span>⌕</span><input id="orderSearch" placeholder="Заказ, имя, телефон, товар"></div><select id="orderStatusFilter"><option value="all">Все статусы</option><option value="new">Новый</option><option value="paid">Оплачен</option><option value="purchased">Выкуплен</option><option value="us_warehouse">На складе США</option><option value="international">В пути в Украину</option><option value="last_mile">Доставка по Украине</option><option value="delivered">Получен</option><option value="cancelled">Отменён</option></select><button class="primary-small" id="exportOrders">Экспорт CSV</button></div>
+        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Заказ</th><th>Клиент</th><th>Товары</th><th>Сумма</th><th>Комиссия</th><th>Статус</th><th>Создан</th><th></th></tr></thead><tbody id="ordersBody"></tbody></table></div></article>
+      </section>
+
+      <section class="admin-section" data-section-panel="purchases">
+        <div class="section-intro"><div><p class="eyebrow">США</p><h2>Выкуп и инвойсы Amazon</h2></div><p>Один экран для ссылки товара, ASIN, фактической цены, Amazon Order ID, продавца, статуса выкупа и инвойса.</p></div>
+        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Заказ</th><th>Товар</th><th>Amazon</th><th>Факт. цена</th><th>Amazon Order ID</th><th>Инвойс</th><th>Статус</th></tr></thead><tbody id="purchasesBody"></tbody></table></div></article>
+      </section>
+
+      <section class="admin-section" data-section-panel="warehouse">
+        <div class="section-intro"><div><p class="eyebrow">3PL / Forwarder</p><h2>Склад США и консолидация</h2></div><p>Приходящие Amazon-посылки связываются с нашим order ID. Здесь будут вес, размеры, фото, package ID и объединение товаров одного клиента.</p></div>
+        <div class="warehouse-board" id="warehouseBoard"></div>
+      </section>
+
+      <section class="admin-section" data-section-panel="logistics">
+        <div class="section-intro"><div><p class="eyebrow">USA → Ukraine</p><h2>Международная и последняя миля</h2></div><p>International tracking, перевозчик, декларация, фактический оплачиваемый вес, украинская ТТН и конечный статус.</p></div>
+        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Заказ</th><th>International</th><th>Вес</th><th>Перевозчик</th><th>Украина / ТТН</th><th>Статус</th></tr></thead><tbody id="logisticsBody"></tbody></table></div></article>
+      </section>
+
+      <section class="admin-section" data-section-panel="products">
+        <div class="section-intro"><div><p class="eyebrow">Каталог</p><h2>Товары и актуальность</h2></div><p>Система показывает только позиции, прошедшие фильтр скидки, рейтинга, отзывов, веса, стоимости и доставки. В production здесь будет ежедневная проверка и журнал изменений.</p></div>
+        <div class="catalog-health" id="catalogHealth"></div>
+        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Товар</th><th>ASIN</th><th>Amazon</th><th>Скидка</th><th>Рейтинг</th><th>Вес</th><th>Риск</th><th>Проверено</th></tr></thead><tbody id="productsBody"></tbody></table></div></article>
+      </section>
+
+      <section class="admin-section" data-section-panel="finance">
+        <div class="stats-grid finance-stats"><article class="stat-card"><small>Средства на товары</small><strong id="finGoods">0 ₴</strong><span>деньги клиента на исполнение</span></article><article class="stat-card"><small>Доставка и расходы</small><strong id="finShipping">0 ₴</strong><span>отдельный поток расходов</span></article><article class="stat-card"><small>Комиссия</small><strong id="finCommission">0 ₴</strong><span>вознаграждение сервиса</span></article><article class="stat-card"><small>Всего получено</small><strong id="finTotal">0 ₴</strong><span>контрольная сумма заказов</span></article></div>
+        <div class="admin-grid admin-grid--2"><article class="admin-card"><div class="card-head"><div><small>Контроль</small><h2>Разделение денег</h2></div></div><div class="finance-split" id="financeSplit"></div></article><article class="admin-card"><div class="card-head"><div><small>Бухгалтерия</small><h2>Что выгружать</h2></div></div><div class="check-list"><div>✓ Реестр заказов за период</div><div>✓ Отдельно комиссия сервиса</div><div>✓ Средства на товар и доставку</div><div>✓ Фактические расходы и остаток</div><div>✓ Отчёты комиссионера</div><div>✓ Инвойсы и подтверждения оплаты</div></div></article></div>
+      </section>
+
+      <section class="admin-section" data-section-panel="documents">
+        <div class="section-intro"><div><p class="eyebrow">Архив</p><h2>Документы заказа</h2></div><p>Инвойс Amazon, чек/платёж, транспортные документы, подтверждение оферты и итоговый отчёт комиссионера должны быть привязаны к одному order ID.</p></div>
+        <div class="document-grid" id="documentGrid"></div>
+      </section>
+
+      <section class="admin-section" data-section-panel="customers">
+        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Клиент</th><th>Контакты</th><th>Город</th><th>Заказов</th><th>Сумма</th><th>Последний заказ</th></tr></thead><tbody id="customersBody"></tbody></table></div></article>
+      </section>
+
+      <section class="admin-section" data-section-panel="team">
+        <div class="section-intro"><div><p class="eyebrow">RBAC</p><h2>Команда и права доступа</h2></div><p>Роли построены по принципу минимально необходимого доступа. Один сотрудник может работать с заказами, другой только с выкупом, логистикой, финансами или контентом.</p></div>
+        <div class="admin-grid admin-grid--2">
+          <article class="admin-card"><div class="card-head"><div><small>Сотрудники</small><h2>Доступы</h2></div></div><div id="teamList"></div></article>
+          <article class="admin-card"><div class="card-head"><div><small>Добавить</small><h2>Новый администратор</h2></div></div><form class="invite-form" id="inviteForm"><label>Имя<input id="inviteName" required placeholder="Например, Максим"></label><label>Email<input id="inviteEmail" required type="email" placeholder="name@company.com"></label><label>Роль<select id="inviteRole"><option value="operator">Оператор</option><option value="buyer">Закупщик</option><option value="logistics">Логист</option><option value="finance">Финансы</option><option value="content">Контент</option><option value="owner">Владелец</option></select></label><button class="primary-small" type="submit">Добавить в прототип</button><small>Сейчас запись сохраняется только в этом браузере. Реальное приглашение по email заработает после подключения backend/auth.</small></form></article>
+        </div>
+        <article class="admin-card permission-card"><div class="card-head"><div><small>Матрица</small><h2>Что видит каждая роль</h2></div></div><div class="table-wrap"><table><thead><tr><th>Роль</th><th>Заказы</th><th>Выкуп</th><th>Склад</th><th>Логистика</th><th>Товары</th><th>Финансы</th><th>Команда</th></tr></thead><tbody id="permissionBody"></tbody></table></div></article>
+      </section>
+
+      <section class="admin-section" data-section-panel="integrations">
+        <div class="section-intro"><div><p class="eyebrow">API & Webhooks</p><h2>Интеграции</h2></div><p>Здесь будут токены и статусы подключения. Секреты никогда не должны храниться в публичном JavaScript или GitHub.</p></div>
+        <div class="integration-grid" id="integrationGrid"></div>
+      </section>
+
+      <section class="admin-section" data-section-panel="settings">
+        <div class="admin-grid admin-grid--2"><article class="admin-card"><div class="card-head"><div><small>Отбор товара</small><h2>Фильтр каталога</h2></div></div><div class="settings-list" id="selectionSettings"></div></article><article class="admin-card"><div class="card-head"><div><small>Экономика</small><h2>Расчёт</h2></div></div><div class="settings-list" id="pricingSettings"></div></article></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="order-drawer" id="orderDrawer"><button class="drawer-close" id="drawerClose">×</button><div id="drawerContent"></div></aside>
+
+<script src="store.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
