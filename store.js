@@ -45,34 +45,28 @@ function cartFinancialBreakdown(cart=getCart()){
   return result;
 }
 function commissionOrderSnapshot(cart=getCart()){
-  const financials=cartFinancialBreakdown(cart);
-  return {
-    agreementType:'commission',
-    termsVersion:COMMISSION_TERMS_VERSION,
-    offerUrl:'offer.html',
-    agentActs:'in_own_name_at_principal_expense',
-    financials,
-    priceIncreaseRequiresApproval:true,
-    reportStatus:'pending_execution'
-  };
+  return {agreementType:'commission',termsVersion:COMMISSION_TERMS_VERSION,offerUrl:'offer.html',agentActs:'in_own_name_at_principal_expense',financials:cartFinancialBreakdown(cart),priceIncreaseRequiresApproval:true,reportStatus:'pending_execution'};
 }
 function externalPurchaseUrl(p){return String(p?.affiliateUrl||p?.sourceUrl||'').trim()}
 function externalPurchaseRel(p){return p?.affiliateUrl?'sponsored nofollow noopener':'nofollow noopener'}
 function customsLimitEur(){return Number(STORE_CONFIG?.customs?.limitEur||150)}
 function customsRecommendedEur(){return Number(STORE_CONFIG?.customs?.recommendedMaxEur||145)}
-function cartGoodsEur(cart=getCart()){
-  return cart.reduce((sum,x)=>{const p=getProduct(x.id);return sum+(p?priceBreakdown(p).productEur*x.qty:0)},0);
-}
+function cartGoodsEur(cart=getCart()){return cart.reduce((sum,x)=>{const p=getProduct(x.id);return sum+(p?priceBreakdown(p).productEur*x.qty:0)},0)}
 function customsState(valueEur=cartGoodsEur()){
   const limit=customsLimitEur(),recommended=customsRecommendedEur();
   return {valueEur,limit,recommended,over:valueEur>limit,near:valueEur>recommended&&valueEur<=limit,ok:valueEur<=recommended};
+}
+function uniqueProductImages(p){
+  const list=[p?.image,...(Array.isArray(p?.images)?p.images:[])].filter(Boolean);
+  return [...new Set(list)];
 }
 function normalizeProduct(p){
   const weight=Number(p.weight||0),volumetricWeightKg=Number(p.volumetricWeightKg||0);
   const price=Number(p.price ?? (p.priceUsd!=null?calcDeliveredUah(p.priceUsd,Math.max(weight,volumetricWeightKg,.1)):0));
   const old=Number(p.old ?? (p.listPriceUsd!=null?calcDeliveredUah(p.listPriceUsd,Math.max(weight,volumetricWeightKg,.1)):price));
   const discount=Number(p.discount ?? (old>0?Math.round((1-price/old)*100):0));
-  return {...p,id:Number(p.id),price,old,discount,reviews:Number(p.reviews||0),rating:Number(p.rating||0),weight,volumetricWeightKg};
+  const images=uniqueProductImages(p);
+  return {...p,id:Number(p.id),price,old,discount,reviews:Number(p.reviews||0),rating:Number(p.rating||0),weight,volumetricWeightKg,image:images[0]||'',images};
 }
 function passesSelection(p){
   const c=STORE_CONFIG||{},maxWeight=Number(c.maxWeightKg||999);
@@ -87,6 +81,14 @@ function passesSelection(p){
   if(p.dealVerified===false) return false;
   return true;
 }
+function productOrderSnapshot(p,qty=1){
+  const b=priceBreakdown(p),q=Math.max(1,Number(qty)||1);
+  return {id:p.id,asin:p.asin||'',sku:p.sku||'',brand:p.brand||'',name:p.name||'',qty:q,image:p.image||'',sourceUrl:p.sourceUrl||'',affiliateUrl:p.affiliateUrl||'',sourcePriceUsd:Number(p.priceUsd||b.productUsd),listPriceUsd:Number(p.listPriceUsd||0),discount:Number(p.discount||0),rating:Number(p.rating||0),reviews:Number(p.reviews||0),weightKg:Number(p.weight||0),billableWeightKg:b.billableWeightKg,deliveredUnitUah:Number(p.price||b.totalUah),goodsValueEur:b.productEur,lastCheckedAt:p.lastCheckedAt||STORE_META.generatedAt||null};
+}
+function orderItemsSnapshot(cart=getCart()){return cart.map(x=>{const p=getProduct(x.id);return p?productOrderSnapshot(p,x.qty):null}).filter(Boolean)}
+function getOrders(){try{return JSON.parse(localStorage.getItem('amazonUkOrders'))||[]}catch(e){return[]}}
+function saveOrder(order){const orders=getOrders();orders.unshift(order);localStorage.setItem('amazonUkOrders',JSON.stringify(orders.slice(0,250)));localStorage.setItem('amazonUkLastOrder',JSON.stringify(order));return order}
+function formatCheckedDate(value){if(!value)return'не указано';const d=new Date(value);if(Number.isNaN(d.getTime()))return'не указано';return d.toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})}
 async function loadStore(){
   try{
     const [feedRes,configRes]=await Promise.all([fetch('products-feed.json',{cache:'no-store'}),fetch('deal-config.json',{cache:'no-store'})]);
