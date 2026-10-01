@@ -1,7 +1,9 @@
 let STORE_PRODUCTS=[];
 let STORE_CONFIG=null;
 let STORE_META={source:'unknown',live:false,generatedAt:null};
+let STORE_SEARCH_META={mode:'snapshot',source:'local',query:'',error:null};
 const COMMISSION_TERMS_VERSION='2026-10-01-v1';
+const DISCOVERED_SESSION_KEY='amazonUkDiscoveredProducts';
 
 function usdRate(){return Number(STORE_CONFIG?.defaultUsdUahRate||42)}
 function eurUsdRate(){return Number(STORE_CONFIG?.customs?.defaultEurUsdRate||1.17)}
@@ -60,13 +62,24 @@ function uniqueProductImages(p){
   const list=[p?.image,...(Array.isArray(p?.images)?p.images:[])].filter(Boolean);
   return [...new Set(list)];
 }
+function stableProductId(p){
+  const numeric=Number(p?.id);
+  if(Number.isFinite(numeric)&&numeric>0)return numeric;
+  const key=String(p?.asin||p?.sku||p?.sourceUrl||p?.name||Math.random());
+  let hash=2166136261;
+  for(let i=0;i<key.length;i++){hash^=key.charCodeAt(i);hash=Math.imul(hash,16777619)}
+  return 100000000+Math.abs(hash>>>0)%899999999;
+}
+function marketplaceKey(p){return String(p?.source||p?.marketplace||STORE_CONFIG?.source||'amazon-us')}
+function marketplaceLabel(p){const key=marketplaceKey(p);return STORE_CONFIG?.sourceLabels?.[key]||key.replace(/-us$/,'').replace(/^./,s=>s.toUpperCase())}
 function normalizeProduct(p){
   const weight=Number(p.weight||0),volumetricWeightKg=Number(p.volumetricWeightKg||0);
   const price=Number(p.price ?? (p.priceUsd!=null?calcDeliveredUah(p.priceUsd,Math.max(weight,volumetricWeightKg,.1)):0));
   const old=Number(p.old ?? (p.listPriceUsd!=null?calcDeliveredUah(p.listPriceUsd,Math.max(weight,volumetricWeightKg,.1)):price));
   const discount=Number(p.discount ?? (old>0?Math.round((1-price/old)*100):0));
   const images=uniqueProductImages(p);
-  return {...p,id:Number(p.id),price,old,discount,reviews:Number(p.reviews||0),rating:Number(p.rating||0),weight,volumetricWeightKg,image:images[0]||'',images};
+  const source=marketplaceKey(p);
+  return {...p,id:stableProductId(p),price,old,discount,reviews:Number(p.reviews||0),rating:Number(p.rating||0),weight,volumetricWeightKg,image:images[0]||'',images,source,marketplace:source};
 }
 function passesSelection(p){
   const c=STORE_CONFIG||{},maxWeight=Number(c.maxWeightKg||999);
@@ -83,21 +96,66 @@ function passesSelection(p){
 }
 function productOrderSnapshot(p,qty=1){
   const b=priceBreakdown(p),q=Math.max(1,Number(qty)||1);
-  return {id:p.id,asin:p.asin||'',sku:p.sku||'',brand:p.brand||'',name:p.name||'',qty:q,image:p.image||'',sourceUrl:p.sourceUrl||'',affiliateUrl:p.affiliateUrl||'',sourcePriceUsd:Number(p.priceUsd||b.productUsd),listPriceUsd:Number(p.listPriceUsd||0),discount:Number(p.discount||0),rating:Number(p.rating||0),reviews:Number(p.reviews||0),weightKg:Number(p.weight||0),billableWeightKg:b.billableWeightKg,deliveredUnitUah:Number(p.price||b.totalUah),goodsValueEur:b.productEur,lastCheckedAt:p.lastCheckedAt||STORE_META.generatedAt||null};
+  return {id:p.id,asin:p.asin||'',sku:p.sku||'',brand:p.brand||'',name:p.name||'',qty:q,image:p.image||'',source:p.source||'',sourceName:marketplaceLabel(p),sourceUrl:p.sourceUrl||'',affiliateUrl:p.affiliateUrl||'',sourcePriceUsd:Number(p.priceUsd||b.productUsd),listPriceUsd:Number(p.listPriceUsd||0),discount:Number(p.discount||0),rating:Number(p.rating||0),reviews:Number(p.reviews||0),weightKg:Number(p.weight||0),billableWeightKg:b.billableWeightKg,deliveredUnitUah:Number(p.price||b.totalUah),goodsValueEur:b.productEur,lastCheckedAt:p.lastCheckedAt||STORE_META.generatedAt||null};
 }
 function orderItemsSnapshot(cart=getCart()){return cart.map(x=>{const p=getProduct(x.id);return p?productOrderSnapshot(p,x.qty):null}).filter(Boolean)}
 function getOrders(){try{return JSON.parse(localStorage.getItem('amazonUkOrders'))||[]}catch(e){return[]}}
 function saveOrder(order){const orders=getOrders();orders.unshift(order);localStorage.setItem('amazonUkOrders',JSON.stringify(orders.slice(0,250)));localStorage.setItem('amazonUkLastOrder',JSON.stringify(order));return order}
 function formatCheckedDate(value){if(!value)return'не указано';const d=new Date(value);if(Number.isNaN(d.getTime()))return'не указано';return d.toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+function getDiscoveredProducts(){try{return JSON.parse(sessionStorage.getItem(DISCOVERED_SESSION_KEY))||[]}catch(e){return[]}}
+function rememberDiscoveredProducts(list){
+  if(!Array.isArray(list)||!list.length)return;
+  const merged=[...list,...getDiscoveredProducts()].map(normalizeProduct);
+  const unique=[];const seen=new Set();
+  for(const p of merged){if(seen.has(p.id))continue;seen.add(p.id);unique.push(p)}
+  try{sessionStorage.setItem(DISCOVERED_SESSION_KEY,JSON.stringify(unique.slice(0,150)))}catch(e){}
+  for(const p of unique){if(!STORE_PRODUCTS.some(x=>x.id===p.id)&&passesSelection(p))STORE_PRODUCTS.push(p)}
+}
+function localSearchProducts(query){
+  const q=String(query||'').trim().toLowerCase();
+  if(!q)return [...STORE_PRODUCTS];
+  const tokens=q.split(/\s+/).filter(Boolean);
+  return STORE_PRODUCTS.filter(p=>{const hay=[p.brand,p.name,p.asin,p.sku,p.desc,marketplaceLabel(p),...(p.features||[])].filter(Boolean).join(' ').toLowerCase();return tokens.every(t=>hay.includes(t))});
+}
+async function searchMarketplace(query,{category='all'}={}){
+  const q=String(query||'').trim();
+  const discovery=STORE_CONFIG?.discovery||{};
+  const min=Number(discovery.minimumQueryLength||2);
+  if(!q||q.length<min){const products=localSearchProducts(q);STORE_SEARCH_META={mode:'snapshot',source:'local',query:q,error:null};return {products,meta:STORE_SEARCH_META}}
+  if(discovery.enabled&&discovery.endpoint){
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),Number(discovery.timeoutMs||7000));
+    try{
+      const url=new URL(discovery.endpoint,location.origin);url.searchParams.set('q',q);if(category&&category!=='all')url.searchParams.set('cat',category);
+      const res=await fetch(url,{cache:'no-store',signal:controller.signal,headers:{Accept:'application/json'}});
+      if(!res.ok)throw new Error('Search endpoint '+res.status);
+      const payload=await res.json();
+      const normalized=(payload.products||[]).map(normalizeProduct).filter(passesSelection);
+      rememberDiscoveredProducts(normalized);
+      STORE_SEARCH_META={mode:'remote',source:payload.source||'marketplace-search',query:q,error:null,generatedAt:payload.generatedAt||new Date().toISOString()};
+      return {products:normalized,meta:STORE_SEARCH_META};
+    }catch(err){
+      console.warn('Marketplace search fallback:',err);
+      const products=localSearchProducts(q);
+      STORE_SEARCH_META={mode:'fallback',source:'local',query:q,error:String(err?.message||err)};
+      return {products,meta:STORE_SEARCH_META};
+    }finally{clearTimeout(timeout)}
+  }
+  const products=localSearchProducts(q);
+  STORE_SEARCH_META={mode:'snapshot',source:'local',query:q,error:null};
+  return {products,meta:STORE_SEARCH_META};
+}
 async function loadStore(){
   try{
     const [feedRes,configRes]=await Promise.all([fetch('products-feed.json',{cache:'no-store'}),fetch('deal-config.json',{cache:'no-store'})]);
     if(configRes.ok) STORE_CONFIG=await configRes.json();
     if(!feedRes.ok) throw new Error('Product feed unavailable');
     const feed=await feedRes.json();
-    const normalized=(feed.products||[]).map(normalizeProduct);
-    STORE_PRODUCTS=normalized.filter(passesSelection);
-    STORE_META={source:feed.source||'feed',live:Boolean(feed.live),generatedAt:feed.generatedAt||null};
+    const feedProducts=(feed.products||[]).map(p=>normalizeProduct({...p,source:p.source||feed.sourceKey||'amazon-us'}));
+    const discovered=getDiscoveredProducts().map(normalizeProduct);
+    const merged=[...feedProducts,...discovered];const seen=new Set();
+    STORE_PRODUCTS=merged.filter(p=>{if(seen.has(p.id))return false;seen.add(p.id);return passesSelection(p)});
+    STORE_META={source:feed.source||'feed',live:Boolean(feed.live),generatedAt:feed.generatedAt||null,mode:STORE_CONFIG?.mode||'verified-snapshot'};
     window.dispatchEvent(new CustomEvent('productsloaded',{detail:STORE_META}));
     return STORE_PRODUCTS;
   }catch(err){console.error('Store feed error:',err);STORE_PRODUCTS=[];window.dispatchEvent(new CustomEvent('productsloaded',{detail:{source:'error',live:false,error:true}}));return STORE_PRODUCTS;}
