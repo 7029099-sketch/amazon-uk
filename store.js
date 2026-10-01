@@ -4,6 +4,7 @@ let STORE_META={source:'unknown',live:false,generatedAt:null};
 
 function usdRate(){return Number(STORE_CONFIG?.defaultUsdUahRate||42)}
 function eurUsdRate(){return Number(STORE_CONFIG?.customs?.defaultEurUsdRate||1.17)}
+function billableWeightKg(p){return Math.max(Number(p?.weight||0),Number(p?.volumetricWeightKg||0),.1)}
 function shippingUsd(weightKg=.5){
   const s=STORE_CONFIG?.shipping||{baseUsd:6.9,extraPerKgUsd:4.1};
   const weight=Math.max(.1,Number(weightKg)||.5);
@@ -22,16 +23,16 @@ function calcDeliveredUah(priceUsd,weightKg=.5){
 function sourceValueUsd(p){
   if(p?.priceUsd!=null) return Number(p.priceUsd)||0;
   const totalUsd=(Number(p?.price)||0)/usdRate();
-  const ship=shippingUsd(p?.weight);
+  const ship=shippingUsd(billableWeightKg(p));
   let source=Math.max(0,totalUsd-ship-serviceFeeUsd(Math.max(0,totalUsd-ship)));
   for(let i=0;i<5;i++) source=Math.max(0,totalUsd-ship-serviceFeeUsd(source));
   return source;
 }
 function priceBreakdown(p){
   const productUsd=sourceValueUsd(p);
-  const shipping=shippingUsd(p?.weight);
+  const shipping=shippingUsd(billableWeightKg(p));
   const service=serviceFeeUsd(productUsd);
-  return {productUsd,shippingUsd:shipping,serviceUsd:service,totalUsd:productUsd+shipping+service,totalUah:Number(p?.price)||Math.round((productUsd+shipping+service)*usdRate()),productEur:productUsd/eurUsdRate()};
+  return {productUsd,shippingUsd:shipping,serviceUsd:service,totalUsd:productUsd+shipping+service,totalUah:Number(p?.price)||Math.round((productUsd+shipping+service)*usdRate()),productEur:productUsd/eurUsdRate(),billableWeightKg:billableWeightKg(p)};
 }
 function customsLimitEur(){return Number(STORE_CONFIG?.customs?.limitEur||150)}
 function customsRecommendedEur(){return Number(STORE_CONFIG?.customs?.recommendedMaxEur||145)}
@@ -43,19 +44,23 @@ function customsState(valueEur=cartGoodsEur()){
   return {valueEur,limit,recommended,over:valueEur>limit,near:valueEur>recommended&&valueEur<=limit,ok:valueEur<=recommended};
 }
 function normalizeProduct(p){
-  const price=Number(p.price ?? (p.priceUsd!=null?calcDeliveredUah(p.priceUsd,p.weight):0));
-  const old=Number(p.old ?? (p.listPriceUsd!=null?calcDeliveredUah(p.listPriceUsd,p.weight):price));
+  const weight=Number(p.weight||0),volumetricWeightKg=Number(p.volumetricWeightKg||0);
+  const price=Number(p.price ?? (p.priceUsd!=null?calcDeliveredUah(p.priceUsd,Math.max(weight,volumetricWeightKg,.1)):0));
+  const old=Number(p.old ?? (p.listPriceUsd!=null?calcDeliveredUah(p.listPriceUsd,Math.max(weight,volumetricWeightKg,.1)):price));
   const discount=Number(p.discount ?? (old>0?Math.round((1-price/old)*100):0));
-  return {...p,id:Number(p.id),price,old,discount,reviews:Number(p.reviews||0),rating:Number(p.rating||0),weight:Number(p.weight||0)};
+  return {...p,id:Number(p.id),price,old,discount,reviews:Number(p.reviews||0),rating:Number(p.rating||0),weight,volumetricWeightKg};
 }
 function passesSelection(p){
-  const c=STORE_CONFIG||{};
+  const c=STORE_CONFIG||{},maxWeight=Number(c.maxWeightKg||999);
   if(p.discount<Number(c.minDiscount||0)) return false;
   if(p.rating<Number(c.minRating||0)) return false;
   if(p.reviews<Number(c.minReviews||0)) return false;
-  if(p.weight&&p.weight>Number(c.maxWeightKg||999)) return false;
+  if(billableWeightKg(p)>maxWeight) return false;
   if(p.priceUsd!=null&&Number(p.priceUsd)>Number(c.maxPriceUsd||999999)) return false;
   if(priceBreakdown(p).productEur>customsRecommendedEur()) return false;
+  if(p.restrictedShipping===true||p.hazmat===true||p.shippingAllowed===false) return false;
+  if(c.hideExpiredDeals&&p.dealExpired===true) return false;
+  if(p.dealVerified===false) return false;
   return true;
 }
 async function loadStore(){
@@ -69,9 +74,7 @@ async function loadStore(){
     STORE_META={source:feed.source||'feed',live:Boolean(feed.live),generatedAt:feed.generatedAt||null};
     window.dispatchEvent(new CustomEvent('productsloaded',{detail:STORE_META}));
     return STORE_PRODUCTS;
-  }catch(err){
-    console.error('Store feed error:',err);STORE_PRODUCTS=[];window.dispatchEvent(new CustomEvent('productsloaded',{detail:{source:'error',live:false,error:true}}));return STORE_PRODUCTS;
-  }
+  }catch(err){console.error('Store feed error:',err);STORE_PRODUCTS=[];window.dispatchEvent(new CustomEvent('productsloaded',{detail:{source:'error',live:false,error:true}}));return STORE_PRODUCTS;}
 }
 window.storeReady=loadStore();
 function getProduct(id){return STORE_PRODUCTS.find(p=>p.id===Number(id))||null}
