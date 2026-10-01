@@ -56,6 +56,8 @@ function commissionOrderSnapshot(cart=getCart()){
     reportStatus:'pending_execution'
   };
 }
+function externalPurchaseUrl(p){return String(p?.affiliateUrl||p?.sourceUrl||'').trim()}
+function externalPurchaseRel(p){return p?.affiliateUrl?'sponsored nofollow noopener':'nofollow noopener'}
 function customsLimitEur(){return Number(STORE_CONFIG?.customs?.limitEur||150)}
 function customsRecommendedEur(){return Number(STORE_CONFIG?.customs?.recommendedMaxEur||145)}
 function cartGoodsEur(cart=getCart()){
