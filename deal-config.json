@@ -14,10 +14,24 @@
     "extraPerKgUsd": 4.1
   },
   "serviceFee": {
-    "type": "fixed",
-    "valueUsd": 7
+    "type": "percent_with_minimum",
+    "percent": 12,
+    "minimumUsd": 8
+  },
+  "customs": {
+    "limitEur": 150,
+    "recommendedMaxEur": 145,
+    "defaultEurUsdRate": 1.17,
+    "message": "Стоимость товаров в одном международном отправлении для одного получателя рекомендуется держать до 150 евро. При превышении лимита могут возникнуть таможенные платежи."
+  },
+  "selection": {
+    "preferCompactItems": true,
+    "preferLowVolumetricWeight": true,
+    "avoidRestrictedShippingCategories": true,
+    "preferStrongRealDiscounts": true,
+    "targetMarginMinUsd": 8
   },
   "refreshMinutes": 60,
   "hideExpiredDeals": true,
-  "notes": "Prototype configuration. Replace feed source with an approved live product data provider when credentials are available."
+  "notes": "Prototype configuration. Product selection should favor strong discounts, high ratings, many reviews, compact/lightweight goods, safe shipping categories, and goods value below the customs threshold. Replace feed source with an approved live product data provider when credentials are available."
 }
