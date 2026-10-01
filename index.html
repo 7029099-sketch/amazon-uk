@@ -2,45 +2,40 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Amazon UK — выгодные товары из США</title>
-<meta name="description" content="Выгодные товары из США с понятной ценой и доставкой в Украину.">
+<title>Amazon UK — товары из США с доставкой в Украину</title>
+<meta name="description" content="Каталог выгодных товаров из США. Сразу показываем ориентировочную цену с доставкой в Украину.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="topline"><div class="container topline__in"><span>Доставка по всей Украине</span><span>Цена с доставкой • Онлайн-оплата • Трекинг</span></div></div>
+<div class="topline"><div class="container topline__in"><span>🇺🇦 Доставка по всей Украине</span><span>Цена с доставкой • Трекинг • Поддержка</span></div></div>
 <header class="site-head"><div class="container site-head__in">
 <a class="logo" href="index.html"><span class="logo__mark">a</span><span>amazon <b>uk</b></span></a>
-<nav><a href="catalog.html">Каталог</a><a href="#deals">Скидки</a><a href="#how">Как заказать</a><a href="#faq">FAQ</a></nav>
-<div class="head-actions"><a class="plain-link" href="catalog.html">Найти товар</a><a class="cart-link" href="cart.html">Корзина <span data-cart-count>0</span></a></div>
+<form class="head-search" action="catalog.html"><input name="q" type="search" placeholder="Найти товар или бренд"><button>Найти</button></form>
+<nav><a href="catalog.html">Каталог</a><a href="#how">Как купить</a></nav>
+<div class="head-actions"><a class="cart-link" href="cart.html">Корзина <span data-cart-count>0</span></a></div>
 </div></header>
-
 <main>
-<section class="hero-premium"><div class="container hero-premium__grid">
-<div class="hero-copy"><div class="kicker">Товары из США без сложной логистики</div><h1>Выгодные товары из США.<br><span>Цена уже понятна.</span></h1><p>Выбирайте товар, смотрите ориентировочную цену с доставкой в Украину и оформляйте заказ в несколько шагов.</p>
-<div class="hero-actions"><a class="btn btn--dark" href="catalog.html">Открыть каталог</a><button class="btn btn--light" id="requestBtn">Рассчитать по ссылке</button></div>
-<div class="hero-proof"><div><b>6–12 дней</b><span>типичная доставка</span></div><div><b>до −60%</b><span>скидки в каталоге</span></div><div><b>1 платёж</b><span>товар + доставка</span></div></div></div>
-<div class="hero-showcase"><div class="hero-product"><div class="hero-product__badge">−42%</div><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=85" alt="Наушники"><div class="hero-product__meta"><div><small>Sony</small><h3>WH‑1000XM5</h3></div><div class="hero-price"><del>21 490 ₴</del><strong>12 490 ₴</strong></div></div></div><div class="float-note n1">✓ Цена с доставкой</div><div class="float-note n2">Экономия 9 000 ₴</div></div>
+<section class="hero-clean"><div class="container hero-clean__grid">
+<div><span class="overline">Покупки из США без лишней сложности</span><h1>Нашли скидку.<br>Посчитали доставку.<br><em>Заказали.</em></h1><p>Вы видите ориентировочную итоговую цену сразу. Мы берём на себя покупку в США, доставку и сопровождение.</p><div class="hero-actions"><a class="btn btn--dark" href="catalog.html">Смотреть каталог</a><button class="btn btn--light" id="requestBtn">Рассчитать по ссылке</button></div><div class="micro-proof"><span>✓ Без американского адреса</span><span>✓ Один понятный заказ</span><span>✓ Получение в Украине</span></div></div>
+<div class="hero-deal"><div class="hero-deal__media"><span class="deal-badge">−42%</span><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=88" alt="Наушники Sony"></div><div class="hero-deal__body"><div><small>SONY</small><h3>WH‑1000XM5</h3><span class="rating">★ 4.7 · 12 400 отзывов</span></div><div class="hero-deal__price"><del>21 490 ₴</del><strong>12 490 ₴</strong><small>с доставкой*</small></div></div></div>
 </div></section>
-
-<section class="category-strip"><div class="container"><div class="strip-head"><h2>Категории</h2><a href="catalog.html">Весь каталог →</a></div><div class="category-pills">
-<a href="catalog.html?cat=electronics">Электроника</a><a href="catalog.html?cat=kids">Детям</a><a href="catalog.html?cat=home">Для дома</a><a href="catalog.html?cat=beauty">Beauty</a><a href="catalog.html?cat=auto">Авто</a><a href="catalog.html?cat=toys">Игрушки</a>
+<section class="category-section"><div class="container"><div class="section-head"><div><span class="overline">Быстрый выбор</span><h2>Что ищете?</h2></div><a href="catalog.html">Весь каталог →</a></div><div class="category-cards">
+<a href="catalog.html?cat=electronics"><span>🎧</span><b>Электроника</b><small>Наушники, гаджеты, аксессуары</small></a>
+<a href="catalog.html?cat=home"><span>🏠</span><b>Для дома</b><small>Техника и полезные вещи</small></a>
+<a href="catalog.html?cat=kids"><span>🧸</span><b>Детям</b><small>Развитие и уход</small></a>
+<a href="catalog.html?cat=beauty"><span>✨</span><b>Beauty</b><small>Уход и косметика</small></a>
+<a href="catalog.html?cat=auto"><span>🚗</span><b>Авто</b><small>Аксессуары и электроника</small></a>
+<a href="catalog.html?cat=toys"><span>🧩</span><b>Игрушки</b><small>Подарки и наборы</small></a>
 </div></div></section>
-
-<section class="deals" id="deals"><div class="container"><div class="section-title"><div><span class="overline">Сегодня выгодно</span><h2>Лучшие скидки</h2><p>Товары, где разница в цене действительно заметна.</p></div><a class="all-link" href="catalog.html">Смотреть все товары →</a></div><div class="product-grid" id="productGrid"></div></div></section>
-
-<section class="split-promo"><div class="container split-promo__grid"><article class="promo-card promo-card--dark"><span>Новая коллекция</span><h3>Техника и гаджеты</h3><p>Свежие предложения на электронику и аксессуары.</p><a href="catalog.html?cat=electronics">Смотреть →</a></article><article class="promo-card promo-card--sand"><span>До −55%</span><h3>Дом и lifestyle</h3><p>Полезные вещи, которые выгоднее брать в США.</p><a href="catalog.html?cat=home">Смотреть →</a></article></div></section>
-
-<section class="simple-how" id="how"><div class="container"><div class="section-title"><div><span class="overline">Без лишней бюрократии</span><h2>Как это работает</h2></div></div><div class="how-grid"><article><span>01</span><h3>Выберите товар</h3><p>В каталоге уже указана ориентировочная цена до Украины.</p></article><article><span>02</span><h3>Оформите заказ</h3><p>Имя, телефон, город и способ получения.</p></article><article><span>03</span><h3>Мы купим в США</h3><p>Зафиксируем заказ и отправим его через склад-партнёр.</p></article><article><span>04</span><h3>Получите в Украине</h3><p>Следите за статусом и забирайте удобным способом.</p></article></div></div></section>
-
-<section class="link-order"><div class="container link-order__box"><div><span class="overline light">Не нашли товар?</span><h2>Пришлите ссылку с Amazon</h2><p>Мы посчитаем ориентировочную цену с доставкой в Украину.</p></div><button class="btn btn--white" id="requestBtn2">Рассчитать товар</button></div></section>
-
-<section class="faq-clean" id="faq"><div class="container faq-clean__grid"><div><span class="overline">FAQ</span><h2>Перед первой покупкой</h2></div><div><details open><summary>Цена уже включает доставку?</summary><p>В карточке показывается ориентировочная цена с доставкой и сервисом. Финальная сумма подтверждается перед закупкой.</p></details><details><summary>Что если цена на Amazon изменилась?</summary><p>Мы сообщим новую цену до покупки. Без подтверждения клиента заказ не проводится.</p></details><details><summary>Можно заказать товар, которого нет в каталоге?</summary><p>Да. Пришлите ссылку через форму расчёта.</p></details></div></div></section>
+<section class="deals" id="deals"><div class="container"><div class="section-head"><div><span class="overline">Сегодня выгодно</span><h2>Лучшие предложения</h2><p>Сначала показываем товары, где экономия заметна даже с учётом доставки.</p></div><a href="catalog.html">Показать все →</a></div><div class="product-grid" id="productGrid"></div></div></section>
+<section class="why-strip"><div class="container why-strip__grid"><div><span>01</span><b>Вы сразу видите итог</b><small>Ориентировочная цена до Украины уже в карточке.</small></div><div><span>02</span><b>Не нужен склад в США</b><small>Покупку и логистику берём на себя.</small></div><div><span>03</span><b>Понятный статус заказа</b><small>От покупки до получения в Украине.</small></div></div></section>
+<section class="how-simple" id="how"><div class="container"><div class="section-head"><div><span class="overline">Три шага</span><h2>Купить проще, чем кажется</h2></div></div><div class="how-simple__grid"><article><div>1</div><h3>Выберите товар</h3><p>В каталоге или пришлите нам ссылку с Amazon.</p></article><article><div>2</div><h3>Оформите заказ</h3><p>Подтвердите цену, способ получения и оплату.</p></article><article><div>3</div><h3>Получите в Украине</h3><p>Мы выкупим товар, доставим и дадим статус заказа.</p></article></div></div></section>
+<section class="link-order"><div class="container link-order__box"><div><span class="overline light">Нет товара в каталоге?</span><h2>Вставьте ссылку. Остальное посчитаем.</h2><p>Amazon, Walmart и другие магазины США.</p></div><button class="btn btn--white" id="requestBtn2">Рассчитать товар</button></div></section>
+<section class="faq-clean"><div class="container faq-clean__grid"><div><span class="overline">Коротко о главном</span><h2>Перед заказом</h2></div><div><details open><summary>Цена в карточке окончательная?</summary><p>Это ориентировочная цена с доставкой и сервисом. Перед покупкой мы подтверждаем актуальную стоимость.</p></details><details><summary>Что если цена в США изменилась?</summary><p>Мы покажем новую сумму до покупки. Без вашего подтверждения заказ не оформляется.</p></details><details><summary>Можно заказать любой товар по ссылке?</summary><p>Большинство обычных товаров можно рассчитать индивидуально через форму.</p></details></div></div></section>
 </main>
-
-<footer><div class="container footer-grid"><div><a class="logo logo--foot" href="index.html"><span class="logo__mark">a</span><span>amazon <b>uk</b></span></a><p>Сервис заказа товаров из США с доставкой в Украину.</p></div><div><b>Покупателям</b><a href="catalog.html">Каталог</a><a href="#how">Как заказать</a><a href="cart.html">Корзина</a></div><div><b>Помощь</b><a href="#faq">FAQ</a><a href="#">Оплата и доставка</a><a href="#">Возвраты</a></div><div><b>Важно</b><small>Демонстрационный прототип. Не является официальным сайтом Amazon.</small></div></div></footer>
-
-<div class="modal" id="modal"><div class="modal-card"><button class="modal-x" id="modalClose">×</button><span class="overline">Быстрый расчёт</span><h3>Вставьте ссылку на товар</h3><input type="url" placeholder="https://amazon.com/..."><input type="text" placeholder="Телефон или Telegram"><button class="btn btn--dark wide">Получить расчёт</button><small>Демо-форма, отправка пока не подключена.</small></div></div>
+<footer><div class="container footer-grid"><div><a class="logo logo--foot" href="index.html"><span class="logo__mark">a</span><span>amazon <b>uk</b></span></a><p>Сервис заказа товаров из США с доставкой в Украину.</p></div><div><b>Покупателям</b><a href="catalog.html">Каталог</a><a href="#how">Как заказать</a><a href="cart.html">Корзина</a></div><div><b>Помощь</b><a href="#">Оплата и доставка</a><a href="#">Возвраты</a></div><div><b>Важно</b><small>Демонстрационный прототип. Не является официальным сайтом Amazon.</small></div></div></footer>
+<div class="modal" id="modal"><div class="modal-card"><button class="modal-x" id="modalClose">×</button><span class="overline">Быстрый расчёт</span><h3>Вставьте ссылку на товар</h3><input type="url" placeholder="https://amazon.com/..."><input type="text" placeholder="Телефон или Telegram"><button class="btn btn--dark wide">Получить расчёт</button><small>Демо-форма. Отправка пока не подключена.</small></div></div>
 <script src="store.js"></script><script src="script.js"></script>
 </body></html>
