@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T10:05:00Z",
+  "generatedAt": "2026-10-01T17:45:00Z",
   "source": "amazon-us-manually-verified",
   "live": true,
   "products": [
@@ -10,6 +10,14 @@
       "brand": "KitchenAid",
       "name": "Ribbed Soft Silicone Oven Mitt 2-Pack",
       "image": "https://m.media-amazon.com/images/I/61Dve2ElLdL._AC_SL1500_.jpg",
+      "images": [
+        "https://m.media-amazon.com/images/I/61Dve2ElLdL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/716CiMtNrXL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/81Qyfid-DbL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71S5WNujbHL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/51L6YDLzXJL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/61gJvoVcrcL._AC_SL1500_.jpg"
+      ],
       "priceUsd": 13,
       "listPriceUsd": 34,
       "discount": 62,
@@ -19,47 +27,32 @@
       "sku": "AMZ-B09BK5R5Z5",
       "sourceUrl": "https://www.amazon.com/dp/B09BK5R5Z5",
       "sourceStatus": "live-manual",
-      "lastCheckedAt": "2026-10-01T10:05:00Z",
+      "lastCheckedAt": "2026-10-01T17:45:00Z",
       "dealVerified": true,
       "shippingAllowed": true,
       "restrictedShipping": false,
       "hazmat": false,
       "dealExpired": false,
-      "desc": "Набор из двух силиконовых прихваток KitchenAid. Лёгкий, компактный и удобный для международной доставки товар.",
-      "features": ["2 прихватки в наборе", "Термостойкий силикон", "Вес около 268 г", "Рейтинг Amazon 4.7"]
-    },
-    {
-      "id": 1002,
-      "asin": "B0D9C2V83V",
-      "cat": "electronics",
-      "brand": "Amazon",
-      "name": "Smart Plug with Alexa, 2-Pack",
-      "image": "https://m.media-amazon.com/images/I/61t5zBS57gL._AC_SL1500_.jpg",
-      "priceUsd": 23.98,
-      "listPriceUsd": 49,
-      "discount": 51,
-      "rating": 4.7,
-      "reviews": 571197,
-      "weight": 0.2,
-      "sku": "AMZ-B0D9C2V83V",
-      "sourceUrl": "https://www.amazon.com/dp/B0D9C2V83V",
-      "sourceStatus": "live-manual",
-      "lastCheckedAt": "2026-10-01T10:05:00Z",
-      "dealVerified": true,
-      "shippingAllowed": true,
-      "restrictedShipping": false,
-      "hazmat": false,
-      "dealExpired": false,
-      "desc": "Комплект из двух умных розеток Amazon Smart Plug с поддержкой Alexa. Без аккумуляторов, компактный и лёгкий товар.",
-      "features": ["Комплект 2 шт.", "Работает с Alexa", "Простая настройка", "Рейтинг Amazon 4.7"]
+      "returnRisk": "low",
+      "desc": "Набор из двух силиконовых прихваток KitchenAid. Лёгкий, компактный, без электроники и размеров — удобный товар для международной доставки.",
+      "features": ["2 прихватки в наборе", "Термостойкий силикон", "Вес около 268 г", "Без электроники и совместимости", "Рейтинг Amazon 4.7"]
     },
     {
       "id": 1003,
       "asin": "B0CKYZWDPT",
-      "cat": "beauty",
+      "cat": "travel",
       "brand": "BAGSMART",
       "name": "Travel Toiletry Bag",
       "image": "https://m.media-amazon.com/images/I/71qHvfrZ+mL._AC_SL1500_.jpg",
+      "images": [
+        "https://m.media-amazon.com/images/I/71qHvfrZ+mL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/81GLcqX+n8L._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71PySvCH+0L._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71c+Izx1WEL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71EknBSiswL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71Uj33TZMbL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/81-lekSQvsL._AC_SL1500_.jpg"
+      ],
       "priceUsd": 19,
       "listPriceUsd": 36,
       "discount": 47,
@@ -69,14 +62,15 @@
       "sku": "AMZ-B0CKYZWDPT",
       "sourceUrl": "https://www.amazon.com/dp/B0CKYZWDPT",
       "sourceStatus": "live-manual",
-      "lastCheckedAt": "2026-10-01T10:05:00Z",
+      "lastCheckedAt": "2026-10-01T17:45:00Z",
       "dealVerified": true,
       "shippingAllowed": true,
       "restrictedShipping": false,
       "hazmat": false,
       "dealExpired": false,
-      "desc": "Дорожный органайзер BAGSMART для косметики и туалетных принадлежностей с широким раскрытием и несколькими отделениями.",
-      "features": ["Несколько отделений", "Широкое раскрытие", "Вес около 439 г", "Рейтинг Amazon 4.7"]
+      "returnRisk": "low",
+      "desc": "Дорожный органайзер BAGSMART с широким раскрытием и несколькими отделениями. Без размера, электроники и сложной совместимости.",
+      "features": ["Несколько отделений", "Широкое раскрытие", "Вес около 439 г", "Без размера и электроники", "Рейтинг Amazon 4.7"]
     }
   ]
 }
