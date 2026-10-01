@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FBA Scout — Supplier → Amazon → Profit</title>
+<meta name="description" content="Калькулятор экономики Amazon FBA: закупка, доставка, VAT, комиссии, PPC, прибыль и ROI." />
+<style>
+:root{--bg:#07090d;--card:#0e1219;--line:#202634;--muted:#8d96a8;--text:#f7f8fb;--accent:#76f6a4;--accent2:#47b9ff;--warn:#ffd267;--bad:#ff6b7d}*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:radial-gradient(circle at 18% 0%,rgba(71,185,255,.12),transparent 30%),radial-gradient(circle at 82% 12%,rgba(118,246,164,.09),transparent 28%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.shell{width:min(1180px,calc(100% - 32px));margin:0 auto}.hero{padding:40px 0 28px}.brandRow{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07110b;font-weight:900;font-size:22px}.brand{font-weight:850}.sub{font-size:12px;color:var(--muted)}.pill{margin-left:auto;font-size:12px;padding:8px 11px;border:1px solid var(--line);border-radius:999px;color:#bdc6d8;background:#0b0f15}.hero h1{font-size:clamp(40px,7vw,82px);line-height:.98;letter-spacing:-.06em;max-width:980px;margin:52px 0 20px}.hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;color:transparent}.lead{max-width:850px;color:#b5bdcc;font-size:18px;line-height:1.65}.urlbox{display:flex;gap:10px;margin-top:28px;padding:10px;border:1px solid #2a3242;background:rgba(15,20,28,.9);border-radius:18px}.urlbox input{flex:1;background:transparent;border:0;color:#fff;font-size:16px;padding:14px;outline:none;min-width:0}.urlbox button,.btn{border:0;border-radius:12px;padding:0 20px;font-weight:800;background:linear-gradient(135deg,var(--accent),#a5ffbf);color:#07110b;cursor:pointer}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.card,.results{border:1px solid var(--line);background:linear-gradient(180deg,rgba(17,22,30,.96),rgba(11,15,21,.96));border-radius:22px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.18)}.head{display:flex;align-items:center;gap:12px;margin-bottom:18px}.head i{font-style:normal;width:30px;height:30px;border-radius:9px;background:#151c27;border:1px solid #283244;display:grid;place-items:center;font-size:11px;color:var(--accent)}.head h2{font-size:20px;margin:0}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}.field span,.metric span,.mini span{font-size:12px;color:var(--muted)}.field input{width:100%;background:#0a0e14;border:1px solid #252c39;border-radius:12px;padding:13px 14px;color:#fff;outline:none;font-size:15px}.field input:focus{border-color:#4d6d7d;box-shadow:0 0 0 3px rgba(71,185,255,.08)}.mini{min-height:66px;border:1px dashed #2b3546;border-radius:12px;padding:10px 13px;display:flex;justify-content:center;flex-direction:column;gap:4px}.mini b{font-size:18px}.results{margin-top:18px;padding:28px}.resulttop{display:flex;justify-content:space-between;align-items:center}.eyebrow{font-size:11px;letter-spacing:.15em;color:var(--accent)}.resulttop h2{margin:6px 0 0;font-size:28px}.status{font-size:13px;border-radius:999px;padding:10px 13px;font-weight:800}.good{color:#8ff8af;background:rgba(118,246,164,.1);border:1px solid rgba(118,246,164,.25)}.warn{color:var(--warn);background:rgba(255,210,103,.1);border:1px solid rgba(255,210,103,.25)}.bad{color:var(--bad);background:rgba(255,107,125,.1);border:1px solid rgba(255,107,125,.25)}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}.metric{border:1px solid #222b39;background:#0a0e14;border-radius:16px;padding:17px;display:flex;flex-direction:column;gap:8px}.metric b{font-size:25px;letter-spacing:-.03em}.metric.big{background:linear-gradient(135deg,rgba(118,246,164,.12),rgba(71,185,255,.08));border-color:#314b47}.metric.big b{font-size:34px;color:var(--accent)}.barrow{margin-top:20px}.barlabel{display:flex;justify-content:space-between;color:#aeb8ca;font-size:12px;margin-bottom:8px}.bar{height:9px;background:#171d27;border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:999px}.searchcard{margin-top:18px}.searchline{display:grid;grid-template-columns:1fr auto;gap:10px}.searchline input{background:#0a0e14;border:1px solid #252c39;border-radius:12px;padding:13px 14px;color:#fff;outline:none}.links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.alink{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#fff;border:1px solid #283244;border-radius:16px;padding:18px;background:#0a0e14}.alink span{font-size:13px;color:#9da7b9}.alink em{font-style:normal;color:var(--accent);font-size:12px;font-weight:800}.fine{color:#7f8a9e;font-size:12px;line-height:1.6;padding:18px 0 50px}.topnote{margin-top:12px;color:#9eacc0;font-size:13px}.scoreline{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.scorechip{padding:10px 12px;border-radius:999px;border:1px solid #263041;background:#0a0e14;font-size:12px;color:#aab5c8}.scorechip b{color:#fff}@media(max-width:820px){.grid2{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.links{grid-template-columns:1fr}.urlbox,.searchline{grid-template-columns:1fr;display:grid}.urlbox button,.btn{height:48px}.formgrid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.shell{width:min(100% - 20px,1180px)}.pill{display:none}.hero h1{font-size:46px}.lead{font-size:16px}.formgrid,.metrics{grid-template-columns:1fr}.card,.results{padding:18px}.resulttop{align-items:flex-start;gap:14px;flex-direction:column}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero shell">
+  <div class="brandRow"><div class="logo">F</div><div><div class="brand">FBA Scout</div><div class="sub">Supplier → Amazon → Profit</div></div><div class="pill">Amazon UK MVP</div></div>
+  <h1>Ищем товар, который <span>оставляет прибыль</span>.</h1>
+  <p class="lead">Вставляешь URL поставщика, задаёшь закупку и логистику, находишь ближайший аналог на Amazon и сразу видишь реальную FBA-экономику: VAT, комиссии, PPC, чистую прибыль, маржу, ROI и прибыль со всей партии.</p>
+  <div class="urlbox"><input id="supplierUrl" placeholder="https://alibaba.com/product/... или сайт производителя"><button onclick="readSupplier()">Разобрать URL</button></div>
+  <div class="topnote" id="urlNote">Первая версия не выдумывает цены: если сайт блокирует чтение данных, цену и название вводим вручную.</div>
+</section>
+
+<section class="shell grid2">
+  <div class="card">
+    <div class="head"><i>01</i><h2>Поставщик</h2></div>
+    <label class="field"><span>Название товара</span><input id="title" placeholder="Например: cordless milk frother"></label>
+    <div class="formgrid">
+      <label class="field"><span>Цена фабрики, £</span><input id="supplierPrice" value="4.20"></label>
+      <label class="field"><span>MOQ / партия, шт</span><input id="qty" value="200"></label>
+      <label class="field"><span>Доставка / шт, £</span><input id="shipping" value="1.80"></label>
+      <label class="field"><span>Пошлина / шт, £</span><input id="duty" value="0.35"></label>
+      <label class="field"><span>Prep + label, £</span><input id="prep" value="0.45"></label>
+      <div class="mini"><span>Landed cost</span><b id="landed">£0.00</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="head"><i>02</i><h2>Amazon FBA</h2></div>
+    <div class="formgrid">
+      <label class="field"><span>Цена продажи, £</span><input id="amazonPrice" value="29.99"></label>
+      <label class="field"><span>Referral fee, %</span><input id="referralRate" value="15"></label>
+      <label class="field"><span>FBA fee, £</span><input id="fbaFee" value="3.25"></label>
+      <label class="field"><span>Storage, £</span><input id="storage" value="0.18"></label>
+      <label class="field"><span>PPC / продажу, £</span><input id="ppc" value="3.00"></label>
+      <label class="field"><span>Возвраты / риск, £</span><input id="returns" value="0.60"></label>
+      <label class="field"><span>VAT, %</span><input id="vatRate" value="20"></label>
+      <div class="mini"><span>Amazon fees</span><b id="amazonFees">£0.00</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="shell results">
+  <div class="resulttop"><div><div class="eyebrow">ECONOMICS</div><h2>Результат по товару</h2></div><div id="status" class="status warn">Нужно проверить</div></div>
+  <div class="metrics">
+    <div class="metric big"><span>Чистая прибыль / шт</span><b id="profit">£0.00</b></div>
+    <div class="metric"><span>Net margin</span><b id="margin">0%</b></div>
+    <div class="metric"><span>ROI на landed cost</span><b id="roi">0%</b></div>
+    <div class="metric"><span>Break-even PPC</span><b id="bePpc">£0.00</b></div>
+    <div class="metric"><span>Инвестиция в партию</span><b id="batchCost">£0.00</b></div>
+    <div class="metric"><span>Прибыль с партии</span><b id="batchProfit">£0.00</b></div>
+  </div>
+  <div class="barrow"><div class="barlabel"><span>Запас по марже</span><b id="margin2">0%</b></div><div class="bar"><i id="marginBar" style="width:0"></i></div></div>
+  <div class="scoreline"><div class="scorechip">Referral: <b id="referral">£0.00</b></div><div class="scorechip">VAT: <b id="vat">£0.00</b></div><div class="scorechip">Landed: <b id="landed2">£0.00</b></div><div class="scorechip">Max PPC: <b id="maxPpc">£0.00</b></div></div>
+</section>
+
+<section class="shell card searchcard">
+  <div class="head"><i>03</i><h2>Найти аналоги на Amazon</h2></div>
+  <p style="color:#aeb8ca;line-height:1.6">По названию товара открываем поиск Amazon UK/DE. В следующем шаге подключим Amazon SP-API: тогда ASIN, цена и fee estimate будут подтягиваться автоматически.</p>
+  <div class="searchline"><input id="searchTitle" placeholder="Название для поиска на Amazon"><button class="btn" onclick="makeLinks()">Создать поиск</button></div>
+  <div class="links"><a id="ukLink" class="alink" target="_blank" rel="noreferrer"><b>Amazon UK</b><span>Найти максимально похожие товары и сравнить цену.</span><em>Открыть поиск ↗</em></a><a id="deLink" class="alink" target="_blank" rel="noreferrer"><b>Amazon DE</b><span>Проверить, не сильнее ли экономика в Германии.</span><em>Открыть поиск ↗</em></a></div>
+</section>
+
+<section class="shell fine"><b style="color:#bbc6d6">Важно:</b> это первая рабочая версия калькулятора. Она считает экономику только по введённым данным и не притворяется, что знает реальные продажи конкурентов. Автоматический подбор ASIN, официальный fee estimate, BSR, историю цены и оценку спроса подключим отдельным API-слоем.</section>
+</main>
+<script>
+const ids=['supplierPrice','qty','shipping','duty','prep','amazonPrice','referralRate','fbaFee','storage','ppc','returns','vatRate','title'];ids.forEach(id=>document.getElementById(id).addEventListener('input',()=>{calc();if(id==='title'){document.getElementById('searchTitle').value=document.getElementById('title').value;makeLinks()}}));
+function n(id){return parseFloat(document.getElementById(id).value)||0}
+function money(v){return new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP'}).format(Number.isFinite(v)?v:0)}
+function pct(v){return `${Number.isFinite(v)?v.toFixed(1):'0.0'}%`}
+function calc(){const supplier=n('supplierPrice'),shipping=n('shipping'),duty=n('duty'),prep=n('prep'),price=n('amazonPrice'),ref=price*(n('referralRate')/100),fba=n('fbaFee'),storage=n('storage'),ppc=n('ppc'),returns=n('returns'),vatRate=n('vatRate')/100,vat=price-price/(1+vatRate),landed=supplier+shipping+duty+prep,fees=ref+fba+storage,profit=price-vat-landed-fees-ppc-returns,margin=price?profit/price*100:0,roi=landed?profit/landed*100:0,qty=n('qty'),batchCost=landed*qty,batchProfit=profit*qty,be=Math.max(0,price-vat-landed-fees-returns);document.getElementById('landed').textContent=money(landed);document.getElementById('landed2').textContent=money(landed);document.getElementById('amazonFees').textContent=money(fees);document.getElementById('profit').textContent=money(profit);document.getElementById('margin').textContent=pct(margin);document.getElementById('roi').textContent=pct(roi);document.getElementById('bePpc').textContent=money(be);document.getElementById('maxPpc').textContent=money(be);document.getElementById('batchCost').textContent=money(batchCost);document.getElementById('batchProfit').textContent=money(batchProfit);document.getElementById('referral').textContent=money(ref);document.getElementById('vat').textContent=money(vat);document.getElementById('margin2').textContent=pct(Math.max(0,margin));document.getElementById('marginBar').style.width=Math.min(100,Math.max(0,margin*2))+'%';const s=document.getElementById('status');s.className='status';if(profit>0&&margin>=30&&roi>=100){s.textContent='Сильный кандидат';s.classList.add('good')}else if(profit>0&&margin>=15){s.textContent='Нужно проверить';s.classList.add('warn')}else{s.textContent='Слабая экономика';s.classList.add('bad')}}
+function makeLinks(){const q=encodeURIComponent(document.getElementById('searchTitle').value||document.getElementById('title').value||'product');document.getElementById('ukLink').href='https://www.amazon.co.uk/s?k='+q;document.getElementById('deLink').href='https://www.amazon.de/s?k='+q}
+function readSupplier(){const url=document.getElementById('supplierUrl').value.trim(),note=document.getElementById('urlNote');if(!url){note.textContent='Вставь URL поставщика.';return}try{const u=new URL(url);let raw=decodeURIComponent(u.pathname.split('/').filter(Boolean).pop()||'').replace(/[-_+]/g,' ').replace(/\b\d{5,}\b/g,' ').trim();raw=raw.replace(/\.[a-z0-9]{2,5}$/i,'').trim();if(raw.length>6){document.getElementById('title').value=raw.slice(0,120);document.getElementById('searchTitle').value=raw.slice(0,120);note.textContent='URL разобран. Я подставил название из адреса страницы. Проверь его и цену фабрики.'}else{note.textContent='URL принят. Этот сайт не отдаёт название прямо в адресе, поэтому введи название и цену вручную.'}makeLinks();calc()}catch(e){note.textContent='Похоже, URL введён неверно.'}}
+calc();makeLinks();
+</script>
+</body></html>
