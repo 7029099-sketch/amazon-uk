@@ -43,6 +43,24 @@
     "targetMarginMinUsd": 8,
     "deprioritize": ["clothing", "shoes", "liquids", "cosmetics", "perfume", "large-appliances", "phones", "expensive-electronics", "glass", "battery-goods", "model-specific-auto", "supplements"]
   },
+  "discovery": {
+    "enabled": false,
+    "endpoint": "/api/search",
+    "timeoutMs": 7000,
+    "minimumQueryLength": 2,
+    "fallback": "verified-snapshot",
+    "activeSources": ["amazon-us"],
+    "plannedSources": ["walmart-us", "ebay-us", "target-us", "bestbuy-us"],
+    "credentials": "server-side-only",
+    "notes": "Enable only after a backend search endpoint is deployed. The browser must never contain marketplace API secrets."
+  },
+  "sourceLabels": {
+    "amazon-us": "Amazon",
+    "walmart-us": "Walmart",
+    "ebay-us": "eBay",
+    "target-us": "Target",
+    "bestbuy-us": "Best Buy"
+  },
   "verification": {
     "targetCadenceHours": 24,
     "hideIfVerificationFails": false,
@@ -53,5 +71,5 @@
     "requireShippingCheck": true
   },
   "hideExpiredDeals": true,
-  "notes": "Current feed is a manually verified snapshot. Replace it with an approved server-side Amazon data source before claiming live or automatic prices. Daily automation should compare previous snapshots, preserve history and mark stale/expired products inactive instead of deleting order history."
+  "notes": "Current feed is a manually verified snapshot. Replace it with approved server-side marketplace data before claiming live or automatic prices. Daily automation should compare previous snapshots, preserve history and mark stale/expired products inactive instead of deleting order history."
 }
