@@ -1,14 +1,13 @@
-# Amazon UK prototype
+# US deals search for Ukraine
 
-Static storefront prototype for curated Amazon US deals with an estimated delivered-to-Ukraine price and two purchase modes:
+Working prototype of a **«Поисковик выгодных товаров США для украинцев»**.
 
-- order through the service under the commission workflow;
-- follow the source Amazon link and buy independently.
+The product is designed as a marketplace-agnostic discovery and ordering layer. Amazon US is the first source; Walmart, eBay, Target, Best Buy and other approved US sources can later plug into the same normalized search API without rebuilding the storefront, cart or operations flow.
 
 ## Main pages
 
-- `index.html` - storefront
-- `catalog.html` - filtered deal catalog
+- `index.html` - storefront / positioning
+- `catalog.html` - filtered deal search
 - `product.html` - product detail with multi-image gallery
 - `cart.html` - cart and customs-value meter
 - `checkout.html` - commission-order checkout prototype
@@ -19,22 +18,37 @@ Static storefront prototype for curated Amazon US deals with an estimated delive
 
 `products-feed.json` is currently a manually verified snapshot. It must not be presented as a continuously live Amazon API feed.
 
-`deal-config.json` defines the current selection and pricing rules.
+`deal-config.json` defines selection, pricing, customs-buffer and marketplace-discovery rules. `MARKETPLACE_SEARCH_SPEC.md` defines the common product contract for future source adapters.
+
+## Backend foundation
+
+The repository now also contains a Node/PostgreSQL backend scaffold:
+
+- `server/index.js` - API + static storefront server
+- `server/catalog.js` - server-side search/filter/pricing layer
+- `server/auth.js` - admin authentication and RBAC
+- `server/db.js` - PostgreSQL connection/transactions
+- `server/schema.sql` - orders, items, documents, events, admin users and audit log
+- `BACKEND_DEPLOY.md` - safe deployment sequence
+
+Current API foundation includes `/api/health`, `/api/search`, server-recalculated order creation, admin login, shared orders, operational updates, documents and team roles.
+
+The current Render Static Site does not execute this backend yet. Keep it running while a separate temporary Node Web Service + PostgreSQL instance is tested. Do not switch `deal-config.json -> discovery.enabled` to `true` until the backend endpoint is actually deployed.
 
 ## Admin
 
-`admin.html` reads the same catalog and test orders saved by checkout. It contains views for orders, Amazon purchase/invoices, US warehouse, consolidation, logistics, finance, documents, customers, team roles, integrations and settings.
+`admin.html` currently works as a local prototype and models views for orders, US purchase/invoices, warehouse, consolidation, logistics, finance, documents, customers, team roles, integrations and settings.
 
-This is not secure production authentication. Real staff accounts, permissions, documents and shared order data require a backend, database and server-side authorization. See `ADMIN_ARCHITECTURE.md`.
+The backend foundation provides the next production layer: shared PostgreSQL data, JWT authentication, server-side roles and audit history. The frontend admin still needs to be connected to those endpoints before it should be used by real staff.
 
 ## Before production
 
-- approved live/authorized Amazon product data source
-- backend + database
-- server-side authentication and RBAC
+- approved live/authorized marketplace product data source
+- deploy backend + PostgreSQL
+- connect checkout/admin frontend to server APIs
+- secure document object storage
 - payments and webhooks
 - carrier / 3PL integrations
-- document storage
 - Telegram bot integration
 - accounting and legal review of the commission/payment/fiscal flow
-- replace or legally review branding before public launch
+- select the final independent brand/domain and replace the working Amazon-oriented prototype branding before public launch
