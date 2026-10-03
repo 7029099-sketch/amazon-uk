@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Хапай Ops - админка</title>
+<title>ХАПАЙ SALE Ops — админка</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
 
     <div class="admin-content">
       <section class="admin-section active" data-section-panel="dashboard">
-        <div class="demo-banner"><b>Админка уже собрана как рабочая модель.</b><span>Сейчас данные заказов хранятся локально в браузере. Для реальных админов, паролей, ролей, инвойсов и синхронизации между устройствами нужен backend + база + авторизация. Интерфейс и структура под это уже подготовлены.</span></div>
+        <div class="demo-banner"><b>ХАПАЙ SALE Ops.</b><span>Сейчас данные заказов хранятся локально в браузере. Для реальных админов, паролей, ролей, инвойсов и синхронизации между устройствами нужен backend + база + авторизация. Интерфейс и структура под это уже подготовлены.</span></div>
         <div class="stats-grid">
           <article class="stat-card"><small>Заказы</small><strong id="statOrders">0</strong><span>всего в системе</span></article>
           <article class="stat-card"><small>Оборот заказов</small><strong id="statRevenue">0 ₴</strong><span>товар + доставка + комиссия</span></article>
@@ -68,12 +68,12 @@
       </section>
 
       <section class="admin-section" data-section-panel="purchases">
-        <div class="section-intro"><div><p class="eyebrow">США</p><h2>Выкуп и инвойсы Amazon</h2></div><p>Один экран для ссылки товара, ASIN, фактической цены, Amazon Order ID, продавца, статуса выкупа и инвойса.</p></div>
-        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Заказ</th><th>Товар</th><th>Amazon</th><th>Факт. цена</th><th>Amazon Order ID</th><th>Инвойс</th><th>Статус</th></tr></thead><tbody id="purchasesBody"></tbody></table></div></article>
+        <div class="section-intro"><div><p class="eyebrow">США</p><h2>Выкуп и инвойсы магазинов</h2></div><p>Один экран для источника товара, ASIN/SKU, фактической цены, order ID магазина, продавца, статуса выкупа и инвойса. Amazon — первый источник, но структура не привязана только к нему.</p></div>
+        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Заказ</th><th>Товар</th><th>Источник</th><th>Факт. цена</th><th>Order ID</th><th>Инвойс</th><th>Статус</th></tr></thead><tbody id="purchasesBody"></tbody></table></div></article>
       </section>
 
       <section class="admin-section" data-section-panel="warehouse">
-        <div class="section-intro"><div><p class="eyebrow">3PL / Forwarder</p><h2>Склад США и консолидация</h2></div><p>Приходящие Amazon-посылки связываются с нашим order ID. Здесь будут вес, размеры, фото, package ID и объединение товаров одного клиента.</p></div>
+        <div class="section-intro"><div><p class="eyebrow">3PL / Forwarder</p><h2>Склад США и консолидация</h2></div><p>Входящие посылки из магазинов США связываются с нашим order ID. Здесь будут вес, размеры, фото, package ID и объединение товаров одного клиента.</p></div>
         <div class="warehouse-board" id="warehouseBoard"></div>
       </section>
 
@@ -83,9 +83,9 @@
       </section>
 
       <section class="admin-section" data-section-panel="products">
-        <div class="section-intro"><div><p class="eyebrow">Каталог</p><h2>Товары и актуальность</h2></div><p>Система показывает только позиции, прошедшие фильтр скидки, рейтинга, отзывов, веса, стоимости и доставки. В production здесь будет ежедневная проверка и журнал изменений.</p></div>
+        <div class="section-intro"><div><p class="eyebrow">Каталог</p><h2>Товары и актуальность</h2></div><p>Система показывает только позиции, прошедшие фильтр скидки, рейтинга, отзывов, веса, стоимости и доставки. В production здесь будет ежедневная проверка, источник данных и журнал изменений.</p></div>
         <div class="catalog-health" id="catalogHealth"></div>
-        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Товар</th><th>ASIN</th><th>Amazon</th><th>Скидка</th><th>Рейтинг</th><th>Вес</th><th>Риск</th><th>Проверено</th></tr></thead><tbody id="productsBody"></tbody></table></div></article>
+        <article class="admin-card"><div class="table-wrap"><table><thead><tr><th>Товар</th><th>ASIN / SKU</th><th>Источник / цена</th><th>Скидка</th><th>Рейтинг</th><th>Вес</th><th>Риск</th><th>Проверено</th></tr></thead><tbody id="productsBody"></tbody></table></div></article>
       </section>
 
       <section class="admin-section" data-section-panel="finance">
@@ -94,7 +94,7 @@
       </section>
 
       <section class="admin-section" data-section-panel="documents">
-        <div class="section-intro"><div><p class="eyebrow">Архив</p><h2>Документы заказа</h2></div><p>Инвойс Amazon, чек/платёж, транспортные документы, подтверждение оферты и итоговый отчёт комиссионера должны быть привязаны к одному order ID.</p></div>
+        <div class="section-intro"><div><p class="eyebrow">Архив</p><h2>Документы заказа</h2></div><p>Инвойс магазина, чек/платёж, транспортные документы, подтверждение оферты и итоговый отчёт комиссионера должны быть привязаны к одному order ID.</p></div>
         <div class="document-grid" id="documentGrid"></div>
       </section>
 
@@ -128,5 +128,6 @@
 
 <script src="store.js"></script>
 <script src="admin.js"></script>
+<script src="admin-compliance.js"></script>
 </body>
 </html>
