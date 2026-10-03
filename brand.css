@@ -1,16 +1,16 @@
 .market-logo .brand-wordmark,.shop-brand .brand-wordmark{display:flex;flex-direction:column;align-items:flex-start;gap:4px;line-height:1;white-space:nowrap}
 .brand-name{font:800 24px/1 Manrope,Inter,system-ui,sans-serif;letter-spacing:-.6px}
-.brand-logo-image{display:block;width:158px;max-width:100%;height:auto;aspect-ratio:1974/797;object-fit:contain}
+.brand-wordmark .brand-logo-image,.admin-brand .brand-logo-image{display:block;width:148px;max-width:100%;height:auto;aspect-ratio:1974/797;object-fit:contain}
 .market-logo .brand-wordmark,.shop-brand .brand-wordmark{gap:0}
 .brand-wordmark .brand-tagline{padding-left:7px}
 .admin-brand .brand-logo-image{width:150px;flex:none}
 button.branded-order.order-through-us,button.branded-order.primary{display:flex;align-items:center;justify-content:center;gap:7px;min-height:58px;height:auto;padding:4px 12px;border:1px solid #ff9b18;border-radius:12px;background:#fff;color:#151515;transition:background .15s,border-color .15s,box-shadow .15s}
 button.branded-order:hover{background:#fff7ed;border-color:#f97316;box-shadow:0 3px 12px #f9731626}
 button.branded-order:focus-visible{outline:3px solid #f97316;outline-offset:3px}
-.order-brand-logo{display:block;width:136px;max-width:calc(100% - 50px);height:auto;aspect-ratio:1974/797;object-fit:contain;flex:0 1 136px;min-width:0;pointer-events:none}
+button.branded-order .order-brand-logo{display:block;width:136px;max-width:calc(100% - 50px);height:auto;aspect-ratio:1974/797;object-fit:contain;flex:0 1 136px;min-width:0;pointer-events:none}
 .order-brand-suffix{font:800 13px/1.2 Inter,system-ui,sans-serif;white-space:nowrap;flex:none;pointer-events:none}
 .brand-tagline{font:600 10px/1.2 Inter,system-ui,sans-serif;letter-spacing:.01em}
 .market-logo .brand-tagline{color:#cbd5e1}
 .shop-brand .brand-tagline{color:#64748b}
-@media(max-width:760px){.market-logo{flex-shrink:0}.market-search{min-width:0}.market-search button{flex-shrink:0;width:42px}}
-@media(max-width:640px){.brand-name{font-size:21px}.brand-tagline{font-size:9px}.market-logo,.shop-brand{gap:8px}.market-logo .brand-logo-image{width:118px}.shop-brand .brand-logo-image{width:132px}.brand-wordmark .brand-tagline{padding-left:5px}.order-brand-logo{width:126px;flex-basis:126px}}
+@media(max-width:760px){.market-logo{flex-shrink:0}.market-logo .brand-wordmark:last-child{display:flex}.market-logo .brand-logo-image{width:118px}.market-search{min-width:0}.market-search button{flex-shrink:0;width:42px}}
+@media(max-width:640px){.brand-name{font-size:21px}.brand-tagline{font-size:9px}.market-logo,.shop-brand{gap:8px}.market-logo .brand-logo-image{width:118px}.shop-brand .brand-logo-image{width:132px}.brand-wordmark .brand-tagline{padding-left:5px}button.branded-order .order-brand-logo{width:126px;flex-basis:126px}}
