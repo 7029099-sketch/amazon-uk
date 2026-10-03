@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "mode": "prototype",
+  "statusModel": [
+    "seoReady",
+    "googleIndexed",
+    "facebookPublished",
+    "instagramPublished",
+    "telegramPublished",
+    "reelsCreated",
+    "affiliateLinkOk"
+  ],
+  "connections": {
+    "googleSearchConsole": {
+      "status": "not_connected",
+      "provider": "Google Search Console",
+      "purpose": "Index status, sitemap and URL inspection"
+    },
+    "facebook": {
+      "status": "not_connected",
+      "provider": "Meta / publishing adapter",
+      "purpose": "Publish product and deal posts to a Facebook Page"
+    },
+    "instagram": {
+      "status": "not_connected",
+      "provider": "Meta / publishing adapter",
+      "purpose": "Publish product posts and approved media to Instagram"
+    },
+    "telegram": {
+      "status": "not_connected",
+      "provider": "Telegram Bot API",
+      "purpose": "Publish deal cards to a Telegram channel"
+    },
+    "reels": {
+      "status": "not_connected",
+      "provider": "media generation + social publishing adapter",
+      "purpose": "Create and publish short-form product videos"
+    },
+    "amazonAssociates": {
+      "status": "not_connected",
+      "provider": "Amazon Associates",
+      "purpose": "Country-specific affiliate tracking IDs and outbound links"
+    }
+  },
+  "countries": {
+    "ua": {
+      "enabled": true,
+      "language": "uk/ru",
+      "currency": "UAH",
+      "purchaseMode": "managed_and_affiliate_separated"
+    },
+    "us": {
+      "enabled": false,
+      "language": "en",
+      "currency": "USD",
+      "purchaseMode": "affiliate"
+    },
+    "pl": {
+      "enabled": false,
+      "language": "pl",
+      "currency": "PLN",
+      "purchaseMode": "affiliate"
+    },
+    "sk": {
+      "enabled": false,
+      "language": "sk",
+      "currency": "EUR",
+      "purchaseMode": "affiliate"
+    }
+  },
+  "automation": {
+    "publishOnlyIfCompliancePasses": true,
+    "publishOnlyIfDealVerified": true,
+    "publishOnlyIfPriceFresh": true,
+    "avoidDuplicatePosts": true,
+    "seo": {
+      "generateTitle": true,
+      "generateDescription": true,
+      "generateProductSchema": true,
+      "generateCanonical": true,
+      "generateHreflang": true,
+      "sitemap": true
+    },
+    "social": {
+      "facebook": true,
+      "instagram": true,
+      "telegram": true,
+      "reels": true
+    }
+  },
+  "notes": "No secrets belong in this file. OAuth tokens, bot tokens, API keys and affiliate credentials must be stored server-side in environment secrets."
+}
