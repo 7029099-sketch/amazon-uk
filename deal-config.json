@@ -104,7 +104,7 @@
       "adPriceMustMatchLandingPageOrBeClearlyQualified": true
     },
     "launchGates": {
-      "independentBrandSelected": false,
+      "independentBrandSelected": true,
       "finalDomainSelected": false,
       "marketplaceDataRightsReviewed": false,
       "amazonAssociatesFlowReviewed": false,
