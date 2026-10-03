@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HAPAI Global — мировой поиск скидок</title>
+  <meta name="description" content="HAPAI Global — тестовый интерфейс мирового поиска выгодных товаров по маркетплейсам США, Китая и Европы.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#ffd400">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="world.css?v=20261003-1">
+</head>
+<body>
+  <div class="top-ribbon">TEST LAB · HAPAI GLOBAL · цены и предложения на этой странице демонстрационные</div>
+
+  <header class="site-header">
+    <a class="brand" href="world.html" aria-label="HAPAI Global">
+      <img src="hapai-sale-logo.png" alt="HAPAI SALE" width="170" height="68">
+    </a>
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="#deals">Скидки</a>
+      <a href="#compare">Сравнить</a>
+      <a href="#countries">Страны</a>
+      <a href="#engine">Как работает</a>
+    </nav>
+    <div class="header-actions">
+      <button class="country-button" id="countryButton"><span id="countryFlag">🇺🇦</span><span id="countryLabel">Украина</span><b>⌄</b></button>
+      <a class="admin-link" href="admin.html">OPS</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-glow hero-glow-a"></div>
+      <div class="hero-glow hero-glow-b"></div>
+      <div class="hero-inner">
+        <div class="eyebrow">WORLD DEAL SEARCH</div>
+        <h1>Найди, где <span>выгоднее.</span><br>В любой стране.</h1>
+        <p class="hero-copy">HAPAI сравнивает предложения разных площадок, считает реальную выгоду и показывает, где товар имеет смысл брать именно для вашей страны.</p>
+
+        <form class="global-search" id="globalSearch">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" autocomplete="off" placeholder="Например: MacBook Air M4, LEGO, powerbank 20000...">
+          <button type="submit">Найти выгоднее</button>
+        </form>
+
+        <div class="quick-searches">
+          <button data-query="MacBook Air">MacBook Air</button>
+          <button data-query="LEGO">LEGO</button>
+          <button data-query="Powerbank 20000">Powerbank</button>
+          <button data-query="KitchenAid">KitchenAid</button>
+          <button data-query="Xiaomi">Xiaomi</button>
+        </div>
+
+        <div class="source-strip" aria-label="Источники">
+          <span>Сравниваем:</span>
+          <b class="amazon">amazon</b>
+          <b class="temu">TEMU</b>
+          <b class="ali">AliExpress</b>
+          <b class="walmart">Walmart</b>
+          <b class="ebay">ebay</b>
+          <i>+ новые источники</i>
+        </div>
+      </div>
+    </section>
+
+    <section class="section deals-section" id="deals">
+      <div class="section-head">
+        <div>
+          <p class="kicker">СЕЙЧАС В HAPAI</p>
+          <h2>Сильные предложения</h2>
+        </div>
+        <div class="filter-row" id="filterRow">
+          <button class="active" data-filter="all">Все</button>
+          <button data-filter="usa">🇺🇸 США</button>
+          <button data-filter="china">🇨🇳 Китай</button>
+          <button data-filter="europe">🇪🇺 Европа</button>
+        </div>
+      </div>
+      <div class="deal-grid" id="dealGrid"></div>
+    </section>
+
+    <section class="section compare-section" id="compare">
+      <div class="compare-copy">
+        <p class="kicker">ОДИН ТОВАР · НЕСКОЛЬКО РЫНКОВ</p>
+        <h2>Смотрим не на скидку.<br>Смотрим на <span>итоговую выгоду.</span></h2>
+        <p>Цена на витрине может выглядеть красиво, но HAPAI должен учитывать источник, доставку, срок, риск и локальную валюту. Побеждает не самый громкий SALE, а самый разумный итог.</p>
+        <div class="compare-points">
+          <div><strong>01</strong><span>Цена товара</span></div>
+          <div><strong>02</strong><span>Доставка и вес</span></div>
+          <div><strong>03</strong><span>Рейтинг и отзывы</span></div>
+          <div><strong>04</strong><span>Итог для вашей страны</span></div>
+        </div>
+      </div>
+
+      <div class="compare-card">
+        <div class="compare-product">
+          <div class="mock-product-image">⌁</div>
+          <div><small>DEMO PRODUCT</small><h3>Powerbank 20 000 mAh</h3><p>Один запрос, несколько площадок</p></div>
+        </div>
+        <div class="market-list" id="marketList"></div>
+        <div class="best-result">
+          <span>HAPAI CHOICE</span>
+          <strong id="bestResult">Лучшее предложение считается...</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section countries-section" id="countries">
+      <div class="section-head countries-head">
+        <div><p class="kicker">ЛОКАЛЬНЫЕ ВЕРСИИ</p><h2>Один HAPAI. Разные страны.</h2></div>
+        <p>Язык, валюта, маркетплейсы и путь покупки меняются. Ядро поиска остаётся одним.</p>
+      </div>
+      <div class="country-grid">
+        <article class="country-card live">
+          <span class="flag">🇺🇦</span><div><small>LIVE FIRST</small><h3>Украина</h3><p>Поиск по миру + отдельный managed-путь доставки через HAPAI.</p></div><b>UAH</b>
+        </article>
+        <article class="country-card">
+          <span class="flag">🇺🇸</span><div><small>AFFILIATE</small><h3>USA</h3><p>Чистый поиск скидок и переход на магазин по affiliate-ссылке.</p></div><b>USD</b>
+        </article>
+        <article class="country-card">
+          <span class="flag">🇵🇱</span><div><small>AFFILIATE</small><h3>Polska</h3><p>Польские цены, локальные источники и подходящий Amazon marketplace.</p></div><b>PLN</b>
+        </article>
+        <article class="country-card">
+          <span class="flag">🇸🇰</span><div><small>AFFILIATE</small><h3>Slovensko</h3><p>Локальная витрина и маршрутизация к доступным EU marketplace.</p></div><b>EUR</b>
+        </article>
+      </div>
+    </section>
+
+    <section class="section engine-section" id="engine">
+      <div class="engine-head">
+        <p class="kicker">ОДИН ТОВАР → МНОГО КАНАЛОВ</p>
+        <h2>Контент-машина HAPAI</h2>
+        <p>Когда товар проходит проверку, одна карточка может кормить сайт, Google и социальные каналы без ручного копипаста.</p>
+      </div>
+      <div class="engine-flow">
+        <div class="engine-node source"><span>01</span><strong>Товар найден</strong><small>Amazon / Temu / AliExpress / ...</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="engine-node verify"><span>02</span><strong>HAPAI проверил</strong><small>Цена · рейтинг · вес · compliance</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="engine-node publish"><span>03</span><strong>Публикация</strong><small>SEO · Social · Affiliate</small></div>
+      </div>
+
+      <div class="status-board">
+        <div class="status-head"><div><small>DEMO STATUS</small><h3>KitchenAid Silicone Mitt 2-Pack</h3></div><span class="status-score">5 / 7 READY</span></div>
+        <div class="status-grid">
+          <div class="status ok"><i>✓</i><span>SEO готов</span></div>
+          <div class="status ok"><i>✓</i><span>Google index</span></div>
+          <div class="status ok"><i>✓</i><span>FB опубликовано</span></div>
+          <div class="status ok"><i>✓</i><span>Instagram опубликовано</span></div>
+          <div class="status ok"><i>✓</i><span>Telegram опубликовано</span></div>
+          <div class="status wait"><i>•</i><span>Reels создан</span></div>
+          <div class="status wait"><i>•</i><span>Affiliate link OK</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section seo-section">
+      <div class="seo-card">
+        <div class="seo-copy">
+          <p class="kicker">PROGRAMMATIC SEO</p>
+          <h2>Каждый хороший товар становится отдельной точкой входа из Google.</h2>
+          <p>Страна → категория → бренд → модель → товар. Постоянные URL, Product schema, canonical, hreflang, sitemap и обновление цены без удаления страницы.</p>
+        </div>
+        <div class="search-preview">
+          <div class="browser-dots"><i></i><i></i><i></i></div>
+          <small>google.com / search</small>
+          <p class="search-url">hapai.com › ua › laptops › lenovo-ideapad-5</p>
+          <h3>Lenovo IdeaPad 5 со скидкой · HAPAI</h3>
+          <p>Сравнили предложения США и Европы. Цена, доставка, рейтинг и итоговая стоимость для Украины.</p>
+          <div class="rich-result"><div class="rich-image">▧</div><div><b>от $429</b><span>★★★★★ 4.7 · актуальность проверена</span></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><img src="hapai-sale-logo.png" alt="HAPAI" width="138" height="54"><p>Find where it’s cheaper.</p></div>
+    <p class="footer-note">Тестовый интерфейс. Цены, статусы публикации и сравнения на этой странице демонстрационные. Реальные интеграции подключаются отдельно.</p>
+  </footer>
+
+  <div class="country-menu" id="countryMenu" hidden>
+    <button data-country="ua" data-flag="🇺🇦" data-label="Украина">🇺🇦 Украина <small>UAH</small></button>
+    <button data-country="us" data-flag="🇺🇸" data-label="USA">🇺🇸 USA <small>USD</small></button>
+    <button data-country="pl" data-flag="🇵🇱" data-label="Polska">🇵🇱 Polska <small>PLN</small></button>
+    <button data-country="sk" data-flag="🇸🇰" data-label="Slovensko">🇸🇰 Slovensko <small>EUR</small></button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="world.js?v=20261003-1"></script>
+</body>
+</html>
