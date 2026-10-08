@@ -1,0 +1,50 @@
+name: Deploy Hapai Sale
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: hapaisale-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.HAPAI_SSH_KEY }}
+          SSH_HOST: ${{ secrets.HAPAI_SSH_HOST }}
+          SSH_PORT: ${{ secrets.HAPAI_SSH_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          PORT="${SSH_PORT:-22}"
+          ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy frontend
+        env:
+          SSH_HOST: ${{ secrets.HAPAI_SSH_HOST }}
+          SSH_USER: ${{ secrets.HAPAI_SSH_USER }}
+          SSH_PORT: ${{ secrets.HAPAI_SSH_PORT }}
+        run: |
+          PORT="${SSH_PORT:-22}"
+          rsync -az             --exclude '.git/'             --exclude '.github/'             --exclude '.env*'             --exclude '*.md'             --exclude 'package*.json'             --exclude 'server/'             -e "ssh -p $PORT"             ./ "$SSH_USER@$SSH_HOST:/home/bb471191/hapaisale.com/www/"
+
+      - name: Verify deploy
+        env:
+          SSH_HOST: ${{ secrets.HAPAI_SSH_HOST }}
+          SSH_USER: ${{ secrets.HAPAI_SSH_USER }}
+          SSH_PORT: ${{ secrets.HAPAI_SSH_PORT }}
+        run: |
+          PORT="${SSH_PORT:-22}"
+          ssh -p "$PORT" "$SSH_USER@$SSH_HOST"             "test -f /home/bb471191/hapaisale.com/www/index.html && echo 'Hapai Sale deployed'"
