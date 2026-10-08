@@ -96,7 +96,7 @@
     "requireRating": true,
     "requireReviews": true,
     "requireShippingCheck": true,
-    "notes": "Three editorial refresh cycles daily do not replace source-specific price freshness, permitted cache windows, or verification before publishing. Fail closed for unverified deals."
+    "notes": "Three planned checks per Ukraine local day: morning, lunchtime, evening (Europe/Kyiv). Exact hours TBD. Do not imply every eight hours or overnight checks. Provider-specific freshness and rights restrictions still apply."
   },
   "compliance": {
     "enforceForPublicCatalog": true,
