@@ -31,7 +31,14 @@
     "message": "Стоимость товаров в одном международном отправлении для одного получателя рекомендуется держать до 150 евро. При превышении лимита могут возникнуть таможенные платежи."
   },
   "selection": {
-    "preferredCategories": ["home", "kitchen", "travel", "toys", "office", "pets"],
+    "preferredCategories": [
+      "home",
+      "kitchen",
+      "travel",
+      "toys",
+      "office",
+      "pets"
+    ],
     "preferCompactItems": true,
     "preferLowVolumetricWeight": true,
     "preferNoSizing": true,
@@ -41,7 +48,20 @@
     "avoidRestrictedShippingCategories": true,
     "preferStrongRealDiscounts": true,
     "targetMarginMinUsd": 8,
-    "deprioritize": ["clothing", "shoes", "liquids", "cosmetics", "perfume", "large-appliances", "phones", "expensive-electronics", "glass", "battery-goods", "model-specific-auto", "supplements"]
+    "deprioritize": [
+      "clothing",
+      "shoes",
+      "liquids",
+      "cosmetics",
+      "perfume",
+      "large-appliances",
+      "phones",
+      "expensive-electronics",
+      "glass",
+      "battery-goods",
+      "model-specific-auto",
+      "supplements"
+    ]
   },
   "discovery": {
     "enabled": false,
@@ -49,8 +69,15 @@
     "timeoutMs": 7000,
     "minimumQueryLength": 2,
     "fallback": "verified-snapshot",
-    "activeSources": ["amazon-us"],
-    "plannedSources": ["walmart-us", "ebay-us", "target-us", "bestbuy-us"],
+    "activeSources": [
+      "amazon-us"
+    ],
+    "plannedSources": [
+      "walmart-us",
+      "ebay-us",
+      "target-us",
+      "bestbuy-us"
+    ],
     "credentials": "server-side-only",
     "notes": "Enable only after a backend search endpoint is deployed. The browser must never contain marketplace API secrets."
   },
@@ -62,16 +89,17 @@
     "bestbuy-us": "Best Buy"
   },
   "verification": {
-    "targetCadenceHours": 24,
-    "hideIfVerificationFails": false,
+    "targetCadenceHours": 8,
+    "hideIfVerificationFails": true,
     "neverLabelManualSnapshotAsLive": true,
     "requirePrice": true,
     "requireRating": true,
     "requireReviews": true,
-    "requireShippingCheck": true
+    "requireShippingCheck": true,
+    "notes": "Three editorial refresh cycles daily do not replace source-specific price freshness, permitted cache windows, or verification before publishing. Fail closed for unverified deals."
   },
   "compliance": {
-    "enforceForPublicCatalog": false,
+    "enforceForPublicCatalog": true,
     "maxPriceAgeHours": 24,
     "requireSourceUrl": true,
     "requireSourceAttribution": true,
@@ -114,7 +142,7 @@
       "taxAndFiscalFlowReviewed": false,
       "carrierRestrictionsReviewed": false
     },
-    "notes": "Guardrails are operational checks, not legal advice. Before public launch and paid ads, re-check current marketplace, advertising, consumer, tax and carrier rules and record the review date."
+    "notes": "Fail-closed public catalog. A source's permitted rights, price freshness and required disclosure must be validated by server-side enforcement before any offer is published. Configuration alone does not enforce compliance."
   },
   "hideExpiredDeals": true,
   "notes": "Current feed is a manually verified snapshot. Replace it with approved server-side marketplace data before claiming live or automatic prices. Daily automation should compare previous snapshots, preserve history and mark stale/expired products inactive instead of deleting order history."
