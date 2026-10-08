@@ -29,6 +29,7 @@ function renderCatalog(){
     let searchResult=query?await searchMarketplace(query,{category:activeCat}):{products:[...STORE_PRODUCTS],meta:{mode:'snapshot'}};
     if(token!==searchToken)return;
     let list=[...searchResult.products];
+    const requestedRetailer=(params.get('retailer')||'').toLowerCase();if(requestedRetailer)list=list.filter(p=>String(p.marketplace||p.source||'').toLowerCase().includes(requestedRetailer));
     if(activeCat!=='all')list=list.filter(p=>p.cat===activeCat);
     const disc=Number(document.querySelector('input[name="disc"]:checked')?.value||0);if(disc)list=list.filter(p=>p.discount>=disc);
     const maxPrice=Number(document.querySelector('input[name="price"]:checked')?.value||0);if(maxPrice)list=list.filter(p=>p.price<=maxPrice);
@@ -37,7 +38,7 @@ function renderCatalog(){
     if(sort?.value==='rating')list.sort((a,b)=>b.rating-a.rating||b.reviews-a.reviews);
     if(sort?.value==='price-asc')list.sort((a,b)=>a.price-b.price);
     if(sort?.value==='price-desc')list.sort((a,b)=>b.price-a.price);
-    grid.innerHTML=list.length?list.map(resultCard).join(''):`<div class="empty-state"><b>По этому запросу пока ничего не прошло наш фильтр.</b><br><a href="discover.html">Продолжить поиск на Amazon ↗</a>.</div>`;
+    grid.innerHTML=list.length?list.map(resultCard).join(''):`<div class="empty-state"><b>По этому запросу пока ничего не прошло наш фильтр.</b><br><a href="discover.html${query?`?q=${encodeURIComponent(query)}`:``}">Продолжить поиск на Amazon ↗</a>.</div>`;
     const rt=document.querySelector('#resultsText');if(rt)rt.textContent=list.length?`${list.length} ${list.length===1?'товар':'товаров'}${query?` для «${query}»`:''}`:'0 товаров';
     if(searchState)searchState.textContent=searchStateText(searchResult.meta,query);
     bindAddButtons();categoryButtons.forEach(b=>b.classList.toggle('active',b.dataset.cat===activeCat));
