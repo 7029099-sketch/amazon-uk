@@ -82,6 +82,12 @@ function normalizeProduct(p){
   return {...p,id:stableProductId(p),price,old,discount,reviews:Number(p.reviews||0),rating:Number(p.rating||0),weight,volumetricWeightKg,image:images[0]||'',images,source,marketplace:source};
 }
 function passesSelection(p){
+  // Public product claims require current licensed evidence, not old manually entered snapshots.
+  const rights=p.compliance||{};
+  if(rights.contentRightsStatus!=='approved'||rights.sourceTermsReviewed!==true)return false;
+  if(p.dealVerified!==true||!p.lastCheckedAt)return false;
+  const checked=Date.parse(p.lastCheckedAt);
+  if(!Number.isFinite(checked)||Date.now()-checked>12*60*60*1000)return false;
   const c=STORE_CONFIG||{},maxWeight=Number(c.maxWeightKg||999);
   if(p.discount<Number(c.minDiscount||0)) return false;
   if(p.rating<Number(c.minRating||0)) return false;
