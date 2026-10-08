@@ -4,4 +4,4 @@ Disallow: /admin.html
 Disallow: /checkout.html
 Disallow: /cart.html
 
-Sitemap: https://amazon-uk.onrender.com/sitemap.xml
+Sitemap: https://hapaisale.com/sitemap.xml
