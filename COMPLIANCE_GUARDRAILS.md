@@ -150,3 +150,19 @@
 ## Перепроверка правил
 
 Правила Amazon, Google, Meta, перевозчиков, платёжных систем и законодательство меняются. Поэтому Compliance Center — это не отметка «проверили один раз навсегда». Перед production launch, подключением нового источника, новой рекламной платформы или существенным изменением checkout нужно заново проверять актуальные официальные правила и фиксировать дату review.
+
+
+## Mandatory Amazon-first publication gate (2026-10-08)
+
+This project adopts a fail-closed policy for Amazon-derived offers. A deal must not be publicly promoted as verified, used in ads, or automatically posted unless the applicable official Amazon program terms and the specific data/content license have been checked and documented.
+
+- Review the current official Amazon Associates Operating Agreement, Program Policies, Product Advertising API / Creators API terms (as applicable), trademark guidelines, and relevant country-specific terms before enabling an integration.
+- Record for each source: permitted API, account approval, allowed use, image/link caching restrictions, price freshness, attribution/disclosure requirements, permitted distribution channels, review date, and reviewer.
+- Do not scrape or bulk copy Amazon product content without express permission.
+- Display up to five product images only if the source grants the necessary rights; never assume that externally hosted images are automatically licensed for embedding or social reposting.
+- A crossed-out price and discount percentage require an attributable, permitted reference price and a current, independently validated comparison. CTR measures click-through, not discount authenticity.
+- Keep Amazon affiliate links and content within their permitted use; a managed-purchase order must not reuse Associates links or Program Content in an unauthorized way.
+- Telegram, social feeds, email, paid ads, and non-Amazon merchant comparisons each require a separate distribution-rights review before automation.
+- Full-catalog search is disabled until an approved live data/search integration is deployed. A local snapshot must be labeled as such.
+- No claim of compliance certification or guaranteed Amazon approval. Unresolved or ambiguous rights mean hold for manual review.
+- Any compliance review must be repeated when official policies change.
