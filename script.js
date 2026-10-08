@@ -38,7 +38,7 @@ function renderCatalog(){
     if(sort?.value==='rating')list.sort((a,b)=>b.rating-a.rating||b.reviews-a.reviews);
     if(sort?.value==='price-asc')list.sort((a,b)=>a.price-b.price);
     if(sort?.value==='price-desc')list.sort((a,b)=>b.price-a.price);
-    grid.innerHTML=list.length?list.map(resultCard).join(''):`<div class="empty-state"><b>По этому запросу пока ничего не прошло наш фильтр.</b><br><a href="discover.html${query?`?q=${encodeURIComponent(query)}`:``}">Продолжить поиск на Amazon ↗</a>.</div>`;
+    grid.innerHTML=list.length?list.map(resultCard).join(''):`<div class="empty-state"><b>По этому запросу пока ничего не прошло наш фильтр.</b><br><a href="index.html#${encodeURIComponent(requestedRetailer||'amazon')}">Вернуться к магазину ↗</a>.</div>`;
     const rt=document.querySelector('#resultsText');if(rt)rt.textContent=list.length?`${list.length} ${list.length===1?'товар':'товаров'}${query?` для «${query}»`:''}`:'0 товаров';
     if(searchState)searchState.textContent=searchStateText(searchResult.meta,query);
     bindAddButtons();categoryButtons.forEach(b=>b.classList.toggle('active',b.dataset.cat===activeCat));
